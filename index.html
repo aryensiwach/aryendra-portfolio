@@ -12,9 +12,6 @@
   <link href="https://unpkg.com/aos@next/dist/aos.css" rel="stylesheet" />
   <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
 
-  <!-- LOTTIE -->
-  <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
-
   <!-- TYPED -->
   <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12"></script>
 
@@ -25,7 +22,6 @@
   <style>
     body { font-family: 'Comic Neue', cursive; }
 
-    /* Hover Boom Animation */
     @keyframes boom {
       0% { transform: scale(1) rotate(0); }
       25% { transform: scale(1.05) rotate(1deg); }
@@ -35,115 +31,179 @@
     }
     .hover-boom:hover { animation: boom 0.3s ease-in-out; }
 
-    /* Resume dropdown */
     .resume-dropdown-content{
       position:absolute;top:100%;left:0;background:#fff;color:#000;border-radius:0.5rem;
       box-shadow:0 4px 12px rgba(0,0,0,0.15);z-index:50;display:none;
     }
 
-    /* Neon headline */
     .neon-text{
       color:#fff;text-shadow:0 0 5px #ff00c8,0 0 10px #ff00c8,0 0 20px #ff00c8,0 0 40px #ff00c8;
     }
 
-    /* Blur BG */
-    .blur-overlay{
-      position:fixed;top:0;left:0;width:100%;height:100vh;backdrop-filter:blur(4px);z-index:-1;
-    }
-
-    .typed-cursor{font-weight:bold;font-size:24px;}
+    .typed-cursor { font-weight: bold; font-size: 24px; }
     .glow-text {
-    text-shadow: 0 0 5px #00ffff, 0 0 10px #00ffff, 0 0 15px #00ffff;
+      text-shadow: 0 0 5px #00ffff, 0 0 10px #00ffff, 0 0 15px #00ffff;
+    }
+    .bg-global-gradient {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background: linear-gradient(to right, rgba(27, 191, 246, 0.5), rgba(255, 0, 140, 0.5)); /* Light Blue to Light Pink */
+  z-index: -1;
+  backdrop-filter: blur(20px);
+  pointer-events: none;
+}
+  @keyframes blobMove1 {
+  0%, 100% { transform: scale(1)   translate(0px, 0px); }
+  50%      { transform: scale(1.05) translate(10px, -20px); }
+}
+
+@keyframes blobMove2 {
+  0%, 100% { transform: scale(1)   translate(0px, 0px); }
+  50%      { transform: scale(1.05) translate(-20px, 10px); }
+}
+
+@keyframes blobMove3 {
+  0%, 100% { transform: scale(1)   translate(0px, 0px); }
+  50%      { transform: scale(1.07) translate(15px, -10px); }
+}
+
+@keyframes blobMove4 {
+  0%, 100% { transform: scale(1)   translate(0px, 0px); }
+  50%      { transform: scale(1.03) translate(-10px, 20px); }
+}
+
+.animate-blob  { animation: blobMove1 20s infinite ease-in-out; }
+.animate-blob2 { animation: blobMove2 25s infinite ease-in-out; }
+.animate-blob3 { animation: blobMove3 22s infinite ease-in-out; }
+.animate-blob4 { animation: blobMove4 18s infinite ease-in-out; }
+
+.cursor-dot {
+  position: fixed;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  pointer-events: none;
+  background: radial-gradient(circle, #00ffff, transparent);
+  opacity: 0.6;
+  z-index: 9999;
+  animation: trail-fade 0.5s ease-out forwards;
+}
+
+@keyframes trail-fade {
+  to {
+    transform: scale(2);
+    opacity: 0;
   }
+}
+
+
+
+
+
+    
   </style>
 </head>
 
-<body class="text-gray-900 scroll-smooth">
+<body class="text-gray-900 scroll-smooth min-h-screen">
 
-  <!-- BG blur -->
-  <div class="blur-overlay"></div>
+    <!-- Gradient Background -->
+     <div class="bg-global-gradient"></div>
+     <!-- Animated Blob Background -->
+<div class="absolute inset-0 -z-10 overflow-hidden pointer-events-none">
+  <!-- Blob 1 -->
+  <svg class="absolute top-[-100px] left-[-100px] w-[350px] h-[350px] opacity-100 animate-blob" viewBox="0 0 200 200">
+    <path fill="#00CFFF" d="M43.5,-58.2C56.1,-49.9,66.1,-37.2,66.5,-24.6C66.9,-11.9,57.7,0.6,51.3,14.5C44.9,28.4,41.4,43.7,32.1,54.1C22.7,64.4,7.5,69.8,-7.2,70.3C-21.8,70.8,-36,66.5,-45.9,56.5C-55.8,46.6,-61.5,30.9,-62.8,16.1C-64.2,1.2,-61.3,-12.6,-54.6,-24.2C-48,-35.9,-37.5,-45.5,-25.5,-54.1C-13.5,-62.7,0,-70.2,13.2,-68.6C26.4,-67,39.3,-56.4,43.5,-58.2Z" transform="translate(100 100)" />
+  </svg>
 
-  <!-- NAVBAR -->
-  <nav class="fixed top-0 w-full bg-black bg-opacity-90 text-white shadow-xl z-50">
-    <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
-      <h1 class="text-3xl font-semibold text-yellow-400 drop-shadow-md font-[Luckiest_Guy]">ARYENDRA</h1>
+  <!-- Blob 2 -->
+  <svg class="absolute top-[50%] left-[-150px] w-[300px] h-[300px] opacity-100 animate-blob2" viewBox="0 0 200 200">
+    <path fill="#FF60A8" d="M43.5,-58.2C56.1,-49.9,66.1,-37.2,66.5,-24.6C66.9,-11.9,57.7,0.6,51.3,14.5C44.9,28.4,41.4,43.7,32.1,54.1C22.7,64.4,7.5,69.8,-7.2,70.3C-21.8,70.8,-36,66.5,-45.9,56.5C-55.8,46.6,-61.5,30.9,-62.8,16.1C-64.2,1.2,-61.3,-12.6,-54.6,-24.2C-48,-35.9,-37.5,-45.5,-25.5,-54.1C-13.5,-62.7,0,-70.2,13.2,-68.6C26.4,-67,39.3,-56.4,43.5,-58.2Z" transform="translate(100 100)" />
+  </svg>
 
-      <!-- Hamburger -->
-      <button id="menu-btn" class="block md:hidden text-3xl focus:outline-none">
-        <i class="fas fa-bars"></i>
-      </button>
+  <!-- Blob 3 -->
+  <svg class="absolute bottom-[-120px] right-[-150px] w-[400px] h-[400px] opacity-100 animate-blob3" viewBox="0 0 200 200">
+    <path fill="#A962FF" d="M43.5,-58.2C56.1,-49.9,66.1,-37.2,66.5,-24.6C66.9,-11.9,57.7,0.6,51.3,14.5C44.9,28.4,41.4,43.7,32.1,54.1C22.7,64.4,7.5,69.8,-7.2,70.3C-21.8,70.8,-36,66.5,-45.9,56.5C-55.8,46.6,-61.5,30.9,-62.8,16.1C-64.2,1.2,-61.3,-12.6,-54.6,-24.2C-48,-35.9,-37.5,-45.5,-25.5,-54.1C-13.5,-62.7,0,-70.2,13.2,-68.6C26.4,-67,39.3,-56.4,43.5,-58.2Z" transform="translate(100 100)" />
+  </svg>
 
-      <!-- Desktop menu -->
-      <ul class="hidden md:flex gap-6 font-semibold text-lg items-center">
-        <li><a href="#home"         class="hover:text-yellow-300 transition">Home</a></li>
-        <li><a href="#about"        class="hover:text-yellow-300 transition">About</a></li>
-        <li><a href="#skills"       class="hover:text-yellow-300 transition">Skills</a></li>
-        <li><a href="#projects"     class="hover:text-yellow-300 transition">Projects</a></li>
-        <li><a href="#testimonials" class="hover:text-yellow-300 transition">Testimonials</a></li>
-        <li><a href="#contact"      class="hover:text-yellow-300 transition">Contact</a></li>
-        <li class="relative resume-dropdown" id="resumeDropdown">
-          <button class="px-4 py-2 bg-blue-500 rounded-md shadow-md hover:bg-blue-600 transition">Resume ⬇</button>
-          <div class="resume-dropdown-content mt-2 w-60" id="resumeMenu">
-            <a href="aryendra_chaudhary_resume_2025.pdf" target="_blank" class="block px-4 py-2 hover:bg-gray-100 flex items-center gap-2"><i class="fa-solid fa-code"></i> Developer Resume</a>
-            <a href="Aryendra_Designer_Resume.pdf"      target="_blank" class="block px-4 py-2 hover:bg-gray-100 flex items-center gap-2"><i class="fa-solid fa-palette"></i> Designer Resume</a>
-          </div>
-        </li>
-      </ul>
-    </div>
+  <!-- Blob 4 -->
+  <svg class="absolute top-[30%] right-[10%] w-[250px] h-[250px] opacity-100 animate-blob4" viewBox="0 0 200 200">
+    <path fill="#F9C74F" d="M43.5,-58.2C56.1,-49.9,66.1,-37.2,66.5,-24.6C66.9,-11.9,57.7,0.6,51.3,14.5C44.9,28.4,41.4,43.7,32.1,54.1C22.7,64.4,7.5,69.8,-7.2,70.3C-21.8,70.8,-36,66.5,-45.9,56.5C-55.8,46.6,-61.5,30.9,-62.8,16.1C-64.2,1.2,-61.3,-12.6,-54.6,-24.2C-48,-35.9,-37.5,-45.5,-25.5,-54.1C-13.5,-62.7,0,-70.2,13.2,-68.6C26.4,-67,39.3,-56.4,43.5,-58.2Z" transform="translate(100 100)" />
+  </svg>
+</div>
 
-    <!-- Mobile menu -->
-    <ul id="mobile-menu" class="md:hidden hidden flex-col gap-4 px-6 pb-6 font-semibold text-lg bg-black bg-opacity-95">
-      <li><a href="#home"         class="block py-2 border-b border-gray-700">Home</a></li>
-      <li><a href="#about"        class="block py-2 border-b border-gray-700">About</a></li>
-      <li><a href="#skills"       class="block py-2 border-b border-gray-700">Skills</a></li>
-      <li><a href="#projects"     class="block py-2 border-b border-gray-700">Projects</a></li>
-      <li><a href="#testimonials" class="block py-2 border-b border-gray-700">Testimonials</a></li>
-      <li><a href="#contact"      class="block py-2 border-b border-gray-700">Contact</a></li>
-      <li><a href="aryendra_chaudhary_resume_2025.pdf" class="block py-2 border-b border-gray-700">📄 Developer Resume</a></li>
-      <li><a href="Aryendra_Designer_Resume.pdf"       class="block py-2">🎨 Designer Resume</a></li>
+
+
+  
+
+<!-- NAVBAR -->
+<nav class="fixed top-0 w-full bg-black bg-opacity-90 text-white shadow-xl z-50">
+  <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
+   <h1 class="text-xl sm:text-2xl md:text-3xl font-semibold bg-gradient-to-r from-sky-400 via-pink-400 to-pink-600 bg-clip-text text-transparent drop-shadow-md font-[Luckiest_Guy]">
+  ARYENDRA
+</h1>
+
+
+
+    <button id="menu-btn" class="block md:hidden text-3xl focus:outline-none">
+      <i class="fas fa-bars"></i>
+    </button>
+    <ul class="hidden md:flex gap-6 font-semibold text-lg items-center">
+      <li><a href="#home"         class="hover:text-yellow-300 transition">Home</a></li>
+      <li><a href="#about"        class="hover:text-yellow-300 transition">About</a></li>
+      <li><a href="#skills"       class="hover:text-yellow-300 transition">Skills</a></li>
+      <li><a href="#projects"     class="hover:text-yellow-300 transition">Projects</a></li>
+      <li><a href="#testimonials" class="hover:text-yellow-300 transition">Testimonials</a></li>
+      <li><a href="#contact"      class="hover:text-yellow-300 transition">Contact</a></li>
+      <li class="relative resume-dropdown" id="resumeDropdown">
+        <button class="px-4 py-2 bg-gradient-to-r from-sky-400 via-pink-400 to-pink-600 text-white rounded-md shadow-md hover:opacity-90 transition">
+  Resume ⬇
+</button>
+
+        <div class="resume-dropdown-content mt-2 w-60" id="resumeMenu">
+          <a href="aryendra_chaudhary_resume_2025.pdf" target="_blank" class="block px-4 py-2 hover:bg-gray-100 flex items-center gap-2"><i class="fa-solid fa-code"></i> Developer Resume</a>
+          <a href="Aryendra_Designer_Resume.pdf"      target="_blank" class="block px-4 py-2 hover:bg-gray-100 flex items-center gap-2"><i class="fa-solid fa-palette"></i> Designer Resume</a>
+        </div>
+      </li>
+      <li class="relative resume-dropdown" id="galleryDropdown">
+        <button class="px-4 py-2 bg-gradient-to-r from-sky-400 via-pink-400 to-pink-600 text-white rounded-md shadow-md hover:opacity-90 transition">
+  Gallery ⬇
+</button>
+
+        <div class="resume-dropdown-content mt-2 w-60" id="galleryMenu">
+          <a href="developer-gallery.html" target="_blank" class="block px-4 py-2 hover:bg-gray-100 flex items-center gap-2"><i class="fa-solid fa-code"></i> Developer Gallery</a>
+          <a href="designer-gallery.html"  target="_blank" class="block px-4 py-2 hover:bg-gray-100 flex items-center gap-2"><i class="fa-solid fa-palette"></i> Designer Gallery</a>
+        </div>
+      </li>
     </ul>
-  </nav>
+  </div>
+</nav>
 
 <!-- HERO -->
-<header id="home" class="h-screen relative text-center text-white bg-cover bg-center bg-no-repeat" style="background-image:url('20250713_1127_Tech vs. Design Split_simple_compose_01k015nj02f35b1jzj65av4aex copy.png');">
-  
-  <div class="absolute top-[8%] left-1/2 transform -translate-x-1/2 flex flex-col items-center justify-center">
-    
-    <!-- Plane Animation -->
-    <!-- Lottie Animation -->
-<lottie-player 
-  src="https://assets10.lottiefiles.com/packages/lf20_qp1q7mct.json" 
-  background="transparent" 
-  speed="1" 
-  style="width: 280px; height: 280px;" 
-  loop 
-  autoplay>
-</lottie-player>
+<!-- HERO -->
+<header id="home" class="h-screen relative text-center text-white flex flex-col justify-center items-center">
+  <!-- Top main text -->
+  <h2 class="text-4xl sm:text-5xl md:text-6xl font-bold px-6 py-4 rounded-xl mt-0 hover-boom font-[Luckiest_Guy] neon-text">
+    "Hey! I'm Aryendra"
+  </h2>
 
-
-    <!-- Your Name -->
-    <h2 class="text-5xl md:text-6xl font-bold px-10 py-6 rounded-xl shadow-lg mt-0 hover-boom font-[Luckiest_Guy] neon-text">
-      "Hey! I'm Aryendra"
-    </h2>
-
-    <!-- Typing Animation -->
-    <p class="mt-10 text-xl bg-black text-white px-4 py-3 rounded-md font-semibold shadow-md ">
+  <!-- Bottom texts -->
+  <div class="absolute bottom-10 w-full flex flex-col items-center">
+    <p class="text-lg sm:text-xl text-white font-semibold">
       <span id="typingText"></span>
     </p>
-
-    <!-- Swipe Up text -->
-    <p class="mt-10 text-white text-opacity-100 italic text-md animate-bounce tracking-wider neon-text">
-  ↓ Swipe Up to Explore ↓
-</p>
-    
+    <p class="mt-4 text-black italic text-md animate-bounce tracking-wider glow-text">
+      ↓ Swipe Up to Explore ↓
+    </p>
   </div>
 </header>
 
 
 
 
+
   <!-- ABOUT -->
-  <section id="about" class="py-20 bg-white text-center" data-aos="fade-up">
+  <section id="about" class="py-20 bg-white bg-opacity-50 text-center" data-aos="fade-up">
     <div class="max-w-4xl mx-auto px-6">
       <h2 class="text-4xl font-bold text-blue-600 mb-8 hover-boom">About Me</h2>
       <p class="text-lg leading-relaxed">
@@ -156,7 +216,7 @@
   </section>
 
   <!-- SKILLS -->
-  <section id="skills" class="py-20 bg-gradient-to-br from-yellow-100 via-white to-pink-100 text-center" data-aos="fade-up">
+   <section id="skills" class="py-20 bg-white bg-opacity-40 text-center" data-aos="fade-up">
     <h2 class="text-4xl font-bold mb-10 text-purple-700 hover-boom">My Superpowers</h2>
     <div class="grid md:grid-cols-2 gap-10 max-w-6xl mx-auto px-6">
       <div class="bg-white border-4 border-blue-400 p-8 rounded-xl shadow-xl hover-boom transition duration-300">
@@ -181,57 +241,38 @@
   </section>
 
   <!-- PROJECTS -->
-  <section id="projects" class="py-20 bg-white text-center" data-aos="fade-up">
-    <h2 class="text-4xl font-bold text-blue-600 mb-10 hover-boom">Projects</h2>
-    <div class="max-w-6xl mx-auto grid md:grid-cols-2 gap-8 px-6">
-      <!-- left column -->
-      <div class="space-y-6">
-        <div class="bg-blue-100 p-6 rounded-lg shadow-lg border-l-8 border-blue-400 hover-boom">
-          <h3 class="text-xl font-bold mb-1">📁 File Sorter</h3>
-          <p>Automatically organizes files into folders based on extension.</p>
-          <p class="mt-2 text-sm"><strong>Tech Used:</strong> Python, OS Library</p>
-        </div>
-        <div class="bg-blue-100 p-6 rounded-lg shadow-lg border-l-8 border-blue-400 hover-boom">
-          <h3 class="text-xl font-bold mb-1">🧾 Attendance System</h3>
-          <p>Desktop GUI app to manage classroom attendance.</p>
-          <p class="mt-2 text-sm"><strong>Tech Used:</strong> Python, Tkinter</p>
-        </div>
-        <!-- Demo video -->
-        <div class="mt-6 max-w-[250px] mx-auto rounded-xl shadow-xl overflow-hidden">
-          <video autoplay loop muted playsinline class="w-full h-auto rounded-lg border-4 border-blue-400">
-            <source src="intro.mp4" type="video/mp4" />
-            Your browser does not support the video tag.
-          </video>
-          <p class="text-sm mt-2 text-gray-700 italic text-center">💻 Live Web App Demo</p>
-        </div>
+<section id="projects" class="py-20 bg-white bg-opacity-50 text-center" data-aos="fade-up">
+  <h2 class="text-4xl font-bold text-blue-600 mb-10 hover-boom">Projects</h2>
+  <div class="max-w-6xl mx-auto grid md:grid-cols-2 gap-8 px-6">
+    <div class="space-y-6">
+      <div class="bg-blue-100 p-6 rounded-lg shadow-lg border-l-8 border-blue-400 hover-boom">
+        <h3 class="text-xl font-bold mb-1">📁 File Sorter</h3>
+        <p>Automatically organizes files into folders based on extension.</p>
+        <p class="mt-2 text-sm"><strong>Tech Used:</strong> Python, OS Library</p>
       </div>
-
-      <!-- right column -->
-      <div class="space-y-6">
-        <div class="bg-pink-100 p-6 rounded-lg shadow-lg border-l-8 border-pink-400 hover-boom">
-          <h3 class="text-xl font-bold mb-1">🎭 Meme Compilation</h3>
-          <p>High-energy Instagram reels with perfect cuts, audio sync & humor.</p>
-          <p class="mt-2 text-sm"><strong>Tools:</strong> Premiere Pro, After Effects</p>
-        </div>
-        <div class="bg-pink-100 p-6 rounded-lg shadow-lg border-l-8 border-pink-400 hover-boom">
-          <h3 class="text-xl font-bold mb-1">📺 Promo Edit</h3>
-          <p>Brand reel with motion graphics & animated typography.</p>
-          <p class="mt-2 text-sm"><strong>Tools:</strong> After Effects, Photoshop</p>
-        </div>
-        <!-- Video preview -->
-        <div class="rounded-xl shadow-xl overflow-hidden max-w-[250px] mx-auto">
-          <video autoplay loop muted playsinline class="w-full h-auto rounded-lg border-4 border-pink-400">
-            <source src="intro.mp4" type="video/mp4" />
-            Your browser does not support the video tag.
-          </video>
-          <p class="text-sm mt-2 text-gray-700 italic">🔁 Reel Preview</p>
-        </div>
+      <div class="bg-blue-100 p-6 rounded-lg shadow-lg border-l-8 border-blue-400 hover-boom">
+        <h3 class="text-xl font-bold mb-1">🧾 Attendance System</h3>
+        <p>Desktop GUI app to manage classroom attendance.</p>
+        <p class="mt-2 text-sm"><strong>Tech Used:</strong> Python, Tkinter</p>
       </div>
     </div>
-  </section>
+    <div class="space-y-6">
+      <div class="bg-pink-100 p-6 rounded-lg shadow-lg border-l-8 border-pink-400 hover-boom">
+        <h3 class="text-xl font-bold mb-1">🎭 Meme Compilation</h3>
+        <p>High-energy Instagram reels with perfect cuts, audio sync & humor.</p>
+        <p class="mt-2 text-sm"><strong>Tools:</strong> Premiere Pro, After Effects</p>
+      </div>
+      <div class="bg-pink-100 p-6 rounded-lg shadow-lg border-l-8 border-pink-400 hover-boom">
+        <h3 class="text-xl font-bold mb-1">📺 Promo Edit</h3>
+        <p>Brand reel with motion graphics & animated typography.</p>
+        <p class="mt-2 text-sm"><strong>Tools:</strong> After Effects, Photoshop</p>
+      </div>
+    </div>
+  </div>
+</section>
 
   <!-- TESTIMONIALS -->
-  <section id="testimonials" class="py-20 bg-blue-50 text-center" data-aos="fade-up">
+  <section id="testimonials" class="py-20 bg-white bg-opacity-40 text-center" data-aos="fade-up">
     <h2 class="text-4xl font-bold text-blue-700 mb-8 hover-boom">Testimonials</h2>
     <div class="max-w-4xl mx-auto grid md:grid-cols-2 gap-8 px-6">
       <div class="bg-white p-6 rounded-xl shadow-lg border-l-8 border-blue-400">
@@ -246,7 +287,7 @@
   </section>
 
   <!-- CONTACT -->
-  <section id="contact" class="py-20 bg-gradient-to-br from-white to-yellow-50 text-center" data-aos="fade-up">
+  <section id="contact" class="py-20 bg-white bg-opacity-50 text-center" data-aos="fade-up">
     <h2 class="text-4xl font-bold text-blue-700 mb-6 hover-boom">Contact Me</h2>
     <p class="mb-6 text-lg">Want to collaborate or just say hi? Drop a message below 👇</p>
     <form class="bg-white max-w-lg mx-auto p-8 rounded-xl shadow-md border-4 border-dashed border-yellow-400 space-y-4" name="contact" netlify>
@@ -267,30 +308,48 @@
     <p>&copy; 2025 Aryendra Chaudhary. Crafted with ❤️ and caffeine.</p>
   </footer>
 
-  <!-- SCRIPTS -->
   <script>
-    // Typed effect
-    new Typed("#typingText", {
-      strings: ["Video Editor 💻","Graphic Designer 🎨","Web Developer 🌐","Memes Creator 😂","Problem Solver 🌐"],
-      typeSpeed:60, backSpeed:30, loop:true,
+  new Typed("#typingText", {
+    strings: ["Video Editor 💻","Graphic Designer 🎨","Web Developer 🌐","Memes Creator 😂","Problem Solver 🌐"],
+    typeSpeed:60, backSpeed:30, loop:true,
+  });
+
+  AOS.init();
+
+  // Resume hover
+  const dropdown = document.getElementById('resumeDropdown');
+  const menu     = document.getElementById('resumeMenu');
+  let hideTimeout;
+  dropdown.addEventListener('mouseenter', () => { clearTimeout(hideTimeout); menu.style.display='block'; });
+  dropdown.addEventListener('mouseleave', () => { hideTimeout = setTimeout(() => { menu.style.display='none'; }, 3000); });
+  menu.addEventListener('mouseenter', () => { clearTimeout(hideTimeout); });
+  menu.addEventListener('mouseleave', () => { hideTimeout = setTimeout(() => { menu.style.display='none'; }, 3000); });
+
+  // Gallery hover
+  const galleryDropdown = document.getElementById('galleryDropdown');
+  const galleryMenu     = document.getElementById('galleryMenu');
+  let galleryTimeout;
+  galleryDropdown.addEventListener('mouseenter', () => { clearTimeout(galleryTimeout); galleryMenu.style.display='block'; });
+  galleryDropdown.addEventListener('mouseleave', () => { galleryTimeout = setTimeout(() => { galleryMenu.style.display='none'; }, 3000); });
+  galleryMenu.addEventListener('mouseenter', () => { clearTimeout(galleryTimeout); });
+  galleryMenu.addEventListener('mouseleave', () => { galleryTimeout = setTimeout(() => { galleryMenu.style.display='none'; }, 3000); });
+
+  // Mobile menu
+  const menuBtn     = document.getElementById('menu-btn');
+  const mobileMenu  = document.getElementById('mobile-menu');
+  menuBtn?.addEventListener('click', () => { mobileMenu.classList.toggle('hidden'); });
+
+  if (window.innerWidth > 768) {
+    document.addEventListener("mousemove", function (e) {
+      const dot = document.createElement("div");
+      dot.className = "cursor-dot";
+      dot.style.left = `${e.pageX}px`;
+      dot.style.top = `${e.pageY}px`;
+      document.body.appendChild(dot);
+      setTimeout(() => dot.remove(), 500);
     });
+  }
+</script>
 
-    // AOS
-    AOS.init();
-
-    /* ===== Resume dropdown delay ===== */
-    const dropdown = document.getElementById('resumeDropdown');
-    const menu     = document.getElementById('resumeMenu');
-    let hideTimeout;
-    const showMenu = () => { clearTimeout(hideTimeout); menu.style.display='block'; };
-    const hideMenu = () => { hideTimeout=setTimeout(()=>{menu.style.display='none';},3000); };
-    dropdown.addEventListener('mouseenter',showMenu); dropdown.addEventListener('mouseleave',hideMenu);
-    menu.addEventListener('mouseenter',showMenu);     menu.addEventListener('mouseleave',hideMenu);
-
-    /* ===== Mobile menu toggle ===== */
-    const menuBtn     = document.getElementById('menu-btn');
-    const mobileMenu  = document.getElementById('mobile-menu');
-    menuBtn.addEventListener('click',()=>{ mobileMenu.classList.toggle('hidden'); });
-  </script>
 </body>
 </html>
