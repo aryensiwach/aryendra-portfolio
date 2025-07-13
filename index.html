@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Aryendra Chaudhary – Portfolio</title>
+
+  <!-- TAILWIND -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- AOS -->
+  <link href="https://unpkg.com/aos@next/dist/aos.css" rel="stylesheet" />
+  <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+
+  <!-- LOTTIE -->
+  <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
+
+  <!-- TYPED -->
+  <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12"></script>
+
+  <!-- FONTS & ICONS -->
+  <link href="https://fonts.googleapis.com/css2?family=Comic+Neue:wght@400;700&family=Bangers&family=Luckiest+Guy&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+
+  <style>
+    body { font-family: 'Comic Neue', cursive; }
+
+    /* Hover Boom Animation */
+    @keyframes boom {
+      0% { transform: scale(1) rotate(0); }
+      25% { transform: scale(1.05) rotate(1deg); }
+      50% { transform: scale(1.1) rotate(-1deg); }
+      75% { transform: scale(1.05) rotate(1deg); }
+      100% { transform: scale(1) rotate(0); }
+    }
+    .hover-boom:hover { animation: boom 0.3s ease-in-out; }
+
+    /* Resume dropdown */
+    .resume-dropdown-content{
+      position:absolute;top:100%;left:0;background:#fff;color:#000;border-radius:0.5rem;
+      box-shadow:0 4px 12px rgba(0,0,0,0.15);z-index:50;display:none;
+    }
+
+    /* Neon headline */
+    .neon-text{
+      color:#fff;text-shadow:0 0 5px #ff00c8,0 0 10px #ff00c8,0 0 20px #ff00c8,0 0 40px #ff00c8;
+    }
+
+    /* Blur BG */
+    .blur-overlay{
+      position:fixed;top:0;left:0;width:100%;height:100vh;backdrop-filter:blur(4px);z-index:-1;
+    }
+
+    .typed-cursor{font-weight:bold;font-size:24px;}
+  </style>
+</head>
+
+<body class="text-gray-900 scroll-smooth">
+
+  <!-- BG blur -->
+  <div class="blur-overlay"></div>
+
+  <!-- NAVBAR -->
+  <nav class="fixed top-0 w-full bg-black bg-opacity-90 text-white shadow-xl z-50">
+    <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
+      <h1 class="text-3xl font-semibold text-yellow-400 drop-shadow-md font-[Luckiest_Guy]">ARYENDRA</h1>
+
+      <!-- Hamburger -->
+      <button id="menu-btn" class="block md:hidden text-3xl focus:outline-none">
+        <i class="fas fa-bars"></i>
+      </button>
+
+      <!-- Desktop menu -->
+      <ul class="hidden md:flex gap-6 font-semibold text-lg items-center">
+        <li><a href="#home"         class="hover:text-yellow-300 transition">Home</a></li>
+        <li><a href="#about"        class="hover:text-yellow-300 transition">About</a></li>
+        <li><a href="#skills"       class="hover:text-yellow-300 transition">Skills</a></li>
+        <li><a href="#projects"     class="hover:text-yellow-300 transition">Projects</a></li>
+        <li><a href="#testimonials" class="hover:text-yellow-300 transition">Testimonials</a></li>
+        <li><a href="#contact"      class="hover:text-yellow-300 transition">Contact</a></li>
+        <li class="relative resume-dropdown" id="resumeDropdown">
+          <button class="px-4 py-2 bg-blue-500 rounded-md shadow-md hover:bg-blue-600 transition">Resume ⬇</button>
+          <div class="resume-dropdown-content mt-2 w-60" id="resumeMenu">
+            <a href="aryendra_chaudhary_resume_2025.pdf" target="_blank" class="block px-4 py-2 hover:bg-gray-100 flex items-center gap-2"><i class="fa-solid fa-code"></i> Developer Resume</a>
+            <a href="Aryendra_Designer_Resume.pdf"      target="_blank" class="block px-4 py-2 hover:bg-gray-100 flex items-center gap-2"><i class="fa-solid fa-palette"></i> Designer Resume</a>
+          </div>
+        </li>
+      </ul>
+    </div>
+
+    <!-- Mobile menu -->
+    <ul id="mobile-menu" class="md:hidden hidden flex-col gap-4 px-6 pb-6 font-semibold text-lg bg-black bg-opacity-95">
+      <li><a href="#home"         class="block py-2 border-b border-gray-700">Home</a></li>
+      <li><a href="#about"        class="block py-2 border-b border-gray-700">About</a></li>
+      <li><a href="#skills"       class="block py-2 border-b border-gray-700">Skills</a></li>
+      <li><a href="#projects"     class="block py-2 border-b border-gray-700">Projects</a></li>
+      <li><a href="#testimonials" class="block py-2 border-b border-gray-700">Testimonials</a></li>
+      <li><a href="#contact"      class="block py-2 border-b border-gray-700">Contact</a></li>
+      <li><a href="aryendra_chaudhary_resume_2025.pdf" class="block py-2 border-b border-gray-700">📄 Developer Resume</a></li>
+      <li><a href="Aryendra_Designer_Resume.pdf"       class="block py-2">🎨 Designer Resume</a></li>
+    </ul>
+  </nav>
+
+  <!-- HERO -->
+  <header id="home" class="h-screen flex flex-col justify-center items-center pt-24 px-4 text-center text-white bg-cover bg-center bg-no-repeat relative z-0" style="background-image:url('20250713_1127_Tech vs. Design Split_simple_compose_01k015nj02f35b1jzj65av4aex copy.png');">
+    <lottie-player src="https://assets5.lottiefiles.com/packages/lf20_x62chJ.json" background="transparent" speed="1" style="width:150px;height:150px;" loop autoplay></lottie-player>
+    <h2 class="text-5xl md:text-6xl font-bold px-8 py-4 rounded-xl shadow-lg mt-4 hover-boom font-[Luckiest_Guy] neon-text">
+      Hey! I'm Aryendra
+    </h2>
+    <p class="mt-6 text-xl bg-white text-black px-4 py-3 rounded-md font-semibold shadow-md">
+      <span id="typingText"></span>
+    </p>
+  </header>
+
+  <!-- ABOUT -->
+  <section id="about" class="py-20 bg-white text-center" data-aos="fade-up">
+    <div class="max-w-4xl mx-auto px-6">
+      <h2 class="text-4xl font-bold text-blue-600 mb-8 hover-boom">About Me</h2>
+      <p class="text-lg leading-relaxed">
+        I'm <span class="text-yellow-500 font-bold">Aryendra Chaudhary</span>, a B.Tech IT student who <span class="italic">codes like an engineer</span> and <span class="italic">edits like an artist</span>. I’ve grown an Instagram audience of 70M+ views by blending memes & motion graphics, and I’ve solved 400+ coding problems while freelancing as a video editor.
+      </p>
+      <p class="mt-4 text-lg leading-relaxed">
+        <strong>Fun fact:</strong> My reel with Chris Bumstead crossed <span class="text-pink-600 font-bold">5 million</span> views overnight!
+      </p>
+    </div>
+  </section>
+
+  <!-- SKILLS -->
+  <section id="skills" class="py-20 bg-gradient-to-br from-yellow-100 via-white to-pink-100 text-center" data-aos="fade-up">
+    <h2 class="text-4xl font-bold mb-10 text-purple-700 hover-boom">My Superpowers</h2>
+    <div class="grid md:grid-cols-2 gap-10 max-w-6xl mx-auto px-6">
+      <div class="bg-white border-4 border-blue-400 p-8 rounded-xl shadow-xl hover-boom transition duration-300">
+        <h3 class="text-2xl font-bold mb-4 text-blue-700">💻 Engineering Skills</h3>
+        <ul class="text-left list-disc list-inside space-y-2">
+          <li>C++, Python, JavaScript</li>
+          <li>HTML, CSS, TailwindCSS</li>
+          <li>React Basics, SQL, DSA</li>
+          <li>Problem Solving (400+ challenges)</li>
+        </ul>
+      </div>
+      <div class="bg-white border-4 border-pink-400 p-8 rounded-xl shadow-xl hover-boom transition duration-300">
+        <h3 class="text-2xl font-bold mb-4 text-pink-600">🎨 Editing & Design Skills</h3>
+        <ul class="text-left list-disc list-inside space-y-2">
+          <li>Adobe Premiere Pro, After Effects</li>
+          <li>Photoshop, Lightroom</li>
+          <li>Color Grading & Motion Graphics</li>
+          <li>Meme & Viral Content Creation</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROJECTS -->
+  <section id="projects" class="py-20 bg-white text-center" data-aos="fade-up">
+    <h2 class="text-4xl font-bold text-blue-600 mb-10 hover-boom">Projects</h2>
+    <div class="max-w-6xl mx-auto grid md:grid-cols-2 gap-8 px-6">
+      <!-- left column -->
+      <div class="space-y-6">
+        <div class="bg-blue-100 p-6 rounded-lg shadow-lg border-l-8 border-blue-400 hover-boom">
+          <h3 class="text-xl font-bold mb-1">📁 File Sorter</h3>
+          <p>Automatically organizes files into folders based on extension.</p>
+          <p class="mt-2 text-sm"><strong>Tech Used:</strong> Python, OS Library</p>
+        </div>
+        <div class="bg-blue-100 p-6 rounded-lg shadow-lg border-l-8 border-blue-400 hover-boom">
+          <h3 class="text-xl font-bold mb-1">🧾 Attendance System</h3>
+          <p>Desktop GUI app to manage classroom attendance.</p>
+          <p class="mt-2 text-sm"><strong>Tech Used:</strong> Python, Tkinter</p>
+        </div>
+        <!-- Demo video -->
+        <div class="mt-6 max-w-[250px] mx-auto rounded-xl shadow-xl overflow-hidden">
+          <video autoplay loop muted playsinline class="w-full h-auto rounded-lg border-4 border-blue-400">
+            <source src="intro.mp4" type="video/mp4" />
+            Your browser does not support the video tag.
+          </video>
+          <p class="text-sm mt-2 text-gray-700 italic text-center">💻 Live Web App Demo</p>
+        </div>
+      </div>
+
+      <!-- right column -->
+      <div class="space-y-6">
+        <div class="bg-pink-100 p-6 rounded-lg shadow-lg border-l-8 border-pink-400 hover-boom">
+          <h3 class="text-xl font-bold mb-1">🎭 Meme Compilation</h3>
+          <p>High-energy Instagram reels with perfect cuts, audio sync & humor.</p>
+          <p class="mt-2 text-sm"><strong>Tools:</strong> Premiere Pro, After Effects</p>
+        </div>
+        <div class="bg-pink-100 p-6 rounded-lg shadow-lg border-l-8 border-pink-400 hover-boom">
+          <h3 class="text-xl font-bold mb-1">📺 Promo Edit</h3>
+          <p>Brand reel with motion graphics & animated typography.</p>
+          <p class="mt-2 text-sm"><strong>Tools:</strong> After Effects, Photoshop</p>
+        </div>
+        <!-- Video preview -->
+        <div class="rounded-xl shadow-xl overflow-hidden max-w-[250px] mx-auto">
+          <video autoplay loop muted playsinline class="w-full h-auto rounded-lg border-4 border-pink-400">
+            <source src="intro.mp4" type="video/mp4" />
+            Your browser does not support the video tag.
+          </video>
+          <p class="text-sm mt-2 text-gray-700 italic">🔁 Reel Preview</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TESTIMONIALS -->
+  <section id="testimonials" class="py-20 bg-blue-50 text-center" data-aos="fade-up">
+    <h2 class="text-4xl font-bold text-blue-700 mb-8 hover-boom">Testimonials</h2>
+    <div class="max-w-4xl mx-auto grid md:grid-cols-2 gap-8 px-6">
+      <div class="bg-white p-6 rounded-xl shadow-lg border-l-8 border-blue-400">
+        <p class="italic">“Aryendra’s editing turned our dull footage into a blockbuster promo in just 24 hours. Highly recommended!”</p>
+        <p class="mt-4 font-bold text-blue-600">— Happy Client</p>
+      </div>
+      <div class="bg-white p-6 rounded-xl shadow-lg border-l-8 border-blue-400">
+        <p class="italic">“The File Sorter script saved my team countless hours every week. Clean code, quick support.”</p>
+        <p class="mt-4 font-bold text-blue-600">— Project Lead</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact" class="py-20 bg-gradient-to-br from-white to-yellow-50 text-center" data-aos="fade-up">
+    <h2 class="text-4xl font-bold text-blue-700 mb-6 hover-boom">Contact Me</h2>
+    <p class="mb-6 text-lg">Want to collaborate or just say hi? Drop a message below 👇</p>
+    <form class="bg-white max-w-lg mx-auto p-8 rounded-xl shadow-md border-4 border-dashed border-yellow-400 space-y-4" name="contact" netlify>
+      <input type="text"  name="name"    placeholder="Your Name"     required class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-yellow-400" />
+      <input type="email" name="email"   placeholder="Your Email"    required class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-yellow-400" />
+      <textarea name="message" rows="4"  placeholder="Your Message"  required class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-yellow-400"></textarea>
+      <button type="submit" class="bg-red-500 text-white font-bold px-6 py-3 rounded-full shadow-lg hover-boom">💬 LET’S TALK!</button>
+    </form>
+    <div class="mt-8 flex justify-center gap-6 text-3xl text-gray-700">
+      <a href="https://www.instagram.com/aryendra_chaudhary17" target="_blank" class="hover:text-pink-500"><i class="fab fa-instagram"></i></a>
+      <a href="https://github.com/aryensiwach"                target="_blank" class="hover:text-black"><i class="fab fa-github"></i></a>
+      <a href="https://www.linkedin.com/in/aryendra-chaudhary-97922224b/"           target="_blank" class="hover:text-blue-600"><i class="fab fa-linkedin"></i></a>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="bg-black text-white text-center py-6">
+    <p>&copy; 2025 Aryendra Chaudhary. Crafted with ❤️ and caffeine.</p>
+  </footer>
+
+  <!-- SCRIPTS -->
+  <script>
+    // Typed effect
+    new Typed("#typingText", {
+      strings: ["Video Editor 💻","Graphic Designer 🎨","Web Developer 🌐","Memes Creator 😂","Problem Solver 🌐"],
+      typeSpeed:60, backSpeed:30, loop:true,
+    });
+
+    // AOS
+    AOS.init();
+
+    /* ===== Resume dropdown delay ===== */
+    const dropdown = document.getElementById('resumeDropdown');
+    const menu     = document.getElementById('resumeMenu');
+    let hideTimeout;
+    const showMenu = () => { clearTimeout(hideTimeout); menu.style.display='block'; };
+    const hideMenu = () => { hideTimeout=setTimeout(()=>{menu.style.display='none';},3000); };
+    dropdown.addEventListener('mouseenter',showMenu); dropdown.addEventListener('mouseleave',hideMenu);
+    menu.addEventListener('mouseenter',showMenu);     menu.addEventListener('mouseleave',hideMenu);
+
+    /* ===== Mobile menu toggle ===== */
+    const menuBtn     = document.getElementById('menu-btn');
+    const mobileMenu  = document.getElementById('mobile-menu');
+    menuBtn.addEventListener('click',()=>{ mobileMenu.classList.toggle('hidden'); });
+  </script>
+</body>
+</html>
