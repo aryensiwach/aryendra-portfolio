@@ -220,7 +220,8 @@
   </h2>
 
   <!-- Bottom texts -->
-  <div class="absolute bottom-10 w-full flex flex-col items-center">
+  <div class="mt-6 sm:absolute sm:bottom-10 w-full flex flex-col items-center">
+
     <p class="text-lg sm:text-xl text-white font-semibold">
       <span id="typingText"></span>
     </p>
@@ -322,7 +323,8 @@
   <section id="contact" class="py-20 bg-white bg-opacity-50 text-center" data-aos="fade-up">
     <h2 class="text-4xl font-bold text-blue-700 mb-6 hover-boom">Contact Me</h2>
     <p class="mb-6 text-lg">Want to collaborate or just say hi? Drop a message below 👇</p>
-    <form class="bg-white max-w-lg mx-auto p-8 rounded-xl shadow-md border-4 border-dashed border-yellow-400 space-y-4" name="contact" netlify>
+    <form action="https://script.google.com/macros/s/AKfycbxSdZWTmZkc5eyv3TiI7TkHziLEh2HLJfsKTjaHsAFji4Kuh-ZcGTOk9w8MonrTITNh/exec" method="POST" class="bg-white max-w-lg mx-auto p-8 rounded-xl shadow-md border-4 border-dashed border-yellow-400 space-y-4">
+
       <input type="text"  name="name"    placeholder="Your Name"     required class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-yellow-400" />
       <input type="email" name="email"   placeholder="Your Email"    required class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-yellow-400" />
       <textarea name="message" rows="4"  placeholder="Your Message"  required class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-yellow-400"></textarea>
@@ -353,18 +355,18 @@
   const menu     = document.getElementById('resumeMenu');
   let hideTimeout;
   dropdown.addEventListener('mouseenter', () => { clearTimeout(hideTimeout); menu.style.display='block'; });
-  dropdown.addEventListener('mouseleave', () => { hideTimeout = setTimeout(() => { menu.style.display='none'; }, 3000); });
+  dropdown.addEventListener('mouseleave', () => { hideTimeout = setTimeout(() => { menu.style.display='none'; }, 1000); });
   menu.addEventListener('mouseenter', () => { clearTimeout(hideTimeout); });
-  menu.addEventListener('mouseleave', () => { hideTimeout = setTimeout(() => { menu.style.display='none'; }, 3000); });
+  menu.addEventListener('mouseleave', () => { hideTimeout = setTimeout(() => { menu.style.display='none'; }, 1000); });
 
   // Gallery hover
   const galleryDropdown = document.getElementById('galleryDropdown');
   const galleryMenu     = document.getElementById('galleryMenu');
   let galleryTimeout;
   galleryDropdown.addEventListener('mouseenter', () => { clearTimeout(galleryTimeout); galleryMenu.style.display='block'; });
-  galleryDropdown.addEventListener('mouseleave', () => { galleryTimeout = setTimeout(() => { galleryMenu.style.display='none'; }, 3000); });
+  galleryDropdown.addEventListener('mouseleave', () => { galleryTimeout = setTimeout(() => { galleryMenu.style.display='none'; }, 1000); });
   galleryMenu.addEventListener('mouseenter', () => { clearTimeout(galleryTimeout); });
-  galleryMenu.addEventListener('mouseleave', () => { galleryTimeout = setTimeout(() => { galleryMenu.style.display='none'; }, 3000); });
+  galleryMenu.addEventListener('mouseleave', () => { galleryTimeout = setTimeout(() => { galleryMenu.style.display='none'; }, 1000); });
 
   // Mobile menu
   const menuBtn     = document.getElementById('menu-btn');
@@ -381,6 +383,8 @@
       setTimeout(() => dot.remove(), 500);
     });
   }
+
+  
 </script>
 
 </body>
