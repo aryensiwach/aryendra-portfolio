@@ -325,7 +325,10 @@
   <section id="contact" class="py-20 bg-white bg-opacity-50 text-center" data-aos="fade-up">
     <h2 class="text-4xl font-bold text-blue-700 mb-6 hover-boom">Contact Me</h2>
     <p class="mb-6 text-lg">Want to collaborate or just say hi? Drop a message below 👇</p>
-    <form action="https://script.google.com/macros/s/AKfycbxSdZWTmZkc5eyv3TiI7TkHziLEh2HLJfsKTjaHsAFji4Kuh-ZcGTOk9w8MonrTITNh/exec" method="POST" class="bg-white max-w-lg mx-auto p-8 rounded-xl shadow-md border-4 border-dashed border-yellow-400 space-y-4">
+    <form id="contact-form" action="https://script.google.com/macros/s/AKfycbxjoXj1pH8RsXXQwhBUtSgjlqZvk3mQn2EcmBpem1v8DiveMecDwdb8QQ2yYNFRlhxi/exec" method="POST" class="bg-white max-w-lg mx-auto p-8 rounded-xl shadow-md border-4 border-dashed border-yellow-400 space-y-4">
+      <div id="form-status" class="mt-4 text-green-600 font-bold hidden">
+  ✅ Message sent successfully!
+</div>
 
       <input type="text"  name="name"    placeholder="Your Name"     required class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-yellow-400" />
       <input type="email" name="email"   placeholder="Your Email"    required class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-yellow-400" />
@@ -403,6 +406,30 @@ galleryMenu.addEventListener('mouseleave', () => {
       setTimeout(() => dot.remove(), 500);
     });
   }
+
+  document.getElementById("contact-form").addEventListener("submit", function (e) {
+  e.preventDefault(); // Page reload rokna
+
+  const form = e.target;
+  const formData = new FormData(form);
+
+  fetch(form.action, {
+    method: "POST",
+    body: formData
+  })
+  .then(response => {
+    if (response.ok) {
+      document.getElementById("form-status").classList.remove("hidden");
+      form.reset();
+    } else {
+      alert("❌ Submission failed. Please try again.");
+    }
+  })
+  .catch(error => {
+    console.error("Error!", error.message);
+    alert("⚠️ Error submitting form.");
+  });
+});
 
   
 </script>
