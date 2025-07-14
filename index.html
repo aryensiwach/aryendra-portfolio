@@ -7,6 +7,8 @@
 
   <!-- TAILWIND -->
   <script src="https://cdn.tailwindcss.com"></script>
+  
+
 
   <!-- AOS -->
   <link href="https://unpkg.com/aos@next/dist/aos.css" rel="stylesheet" />
@@ -84,7 +86,7 @@
   height: 10px;
   border-radius: 50%;
   pointer-events: none;
-  background: radial-gradient(circle, #00ffff, transparent);
+  background: radial-gradient(circle, #ff00a6, transparent);
   opacity: 0.6;
   z-index: 9999;
   animation: trail-fade 0.5s ease-out forwards;
@@ -97,15 +99,13 @@
   }
 }
 
-
-
-
-
-    
   </style>
 </head>
 
-<body class="text-gray-900 scroll-smooth min-h-screen">
+<body class="text-gray-900 bg-white">
+
+
+
 
     <!-- Gradient Background -->
      <div class="bg-global-gradient"></div>
@@ -181,6 +181,7 @@
 </div>
 
     <ul class="hidden md:flex gap-6 font-semibold text-lg items-center">
+      
       <li><a href="#home"         class="hover:text-yellow-300 transition">Home</a></li>
       <li><a href="#about"        class="hover:text-yellow-300 transition">About</a></li>
       <li><a href="#skills"       class="hover:text-yellow-300 transition">Skills</a></li>
@@ -206,7 +207,10 @@
           <a href="developer-gallery.html" target="_blank" class="block px-4 py-2 hover:bg-gray-100 flex items-center gap-2"><i class="fa-solid fa-code"></i> Developer Gallery</a>
           <a href="designer-gallery.html"  target="_blank" class="block px-4 py-2 hover:bg-gray-100 flex items-center gap-2"><i class="fa-solid fa-palette"></i> Designer Gallery</a>
         </div>
+        
+
       </li>
+      
     </ul>
   </div>
 </nav>
@@ -342,10 +346,14 @@
     </div>
   </section>
 
+
+ 
+
   <!-- FOOTER -->
   <footer class="bg-black text-white text-center py-6">
     <p>&copy; 2025 Aryendra Chaudhary. Crafted with ❤️ and caffeine.</p>
   </footer>
+  
 
   <script>
   new Typed("#typingText", {
@@ -391,7 +399,7 @@ galleryMenu.addEventListener('mouseleave', () => {
 });
 
 
-  // Mobile menu
+  
   const menuBtn     = document.getElementById('menu-btn');
   const mobileMenu  = document.getElementById('mobile-menu');
   menuBtn?.addEventListener('click', () => { mobileMenu.classList.toggle('hidden'); });
@@ -408,7 +416,7 @@ galleryMenu.addEventListener('mouseleave', () => {
   }
 
   document.getElementById("contact-form").addEventListener("submit", function (e) {
-  e.preventDefault(); // Page reload rokna
+  e.preventDefault(); 
 
   const form = e.target;
   const formData = new FormData(form);
@@ -431,8 +439,8 @@ galleryMenu.addEventListener('mouseleave', () => {
   });
 });
 
-  
-</script>
 
+
+</script>
 </body>
 </html>
