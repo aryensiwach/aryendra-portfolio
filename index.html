@@ -100,6 +100,23 @@
   }
 }
 
+nav::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: inherit;
+  backdrop-filter: inherit;
+  border-radius: inherit;
+  z-index: -1;
+}
+
+
+
+.light-text-shadow {
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.4);
+  }
+
+
 
   </style>
 </head>
@@ -139,19 +156,26 @@
   
 
 <!-- NAVBAR -->
-<nav class="fixed top-0 w-full bg-black bg-opacity-90 text-white shadow-xl z-50">
+<nav class="fixed top-0 left-0 w-full z-50 px-2 py-0.1 backdrop-blur-[30px] bg-gradient-to-r from-white/10 via-white/5 to-white/10 shadow-lg border-b border-white/10 rounded-b-xl transition-all duration-500 ease-in-out">
+
+ 
+
   <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
-   <h1 class="text-xl sm:text-2xl md:text-3xl font-semibold bg-gradient-to-r from-sky-400 via-pink-400 to-pink-600 bg-clip-text text-transparent drop-shadow-md font-[Luckiest_Guy]">
-  ARYENDRA
-</h1>
+  <!-- <img src="" alt="Logo" class="w-10 h-10 rounded-full border-2 border-pink-500 shadow-lg" />-->
+  <h1 class=" drop-shadow-lg text-2xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-pink-500 to-blue-500 font-[Luckiest_Guy] ,">Aryendra</h1>
+  
+  
+
+  <button id="menu-btn" class="block md:hidden text-3xl text-black bg-white/10 backdrop-blur-md p-3 rounded-xl shadow-xl border border-white/20 hover:bg-white/20 transition-all duration-300">
+  <i class="fas fa-bars"></i>
+</button>
 
 
 
-    <button id="menu-btn" class="block md:hidden text-3xl focus:outline-none">
-      <i class="fas fa-bars"></i>
-    </button>
     <!-- ✅ Mobile Menu with Resume and Gallery -->
-<div id="mobile-menu" class="md:hidden hidden mt-4 space-y-2 text-lg bg-black bg-opacity-90 p-4 rounded-b-xl text-white">
+<div id="mobile-menu" class="md:hidden hidden mt-4 space-y-2 text-lg backdrop-blur-xl bg-gradient-to-r from-white/10 via-white/5 to-white/10 p-4 rounded-b-xl text-black border-t border-white/10 shadow-lg">
+
+
   <a href="#home" class="block hover:text-yellow-300">Home</a>
   <a href="#about" class="block hover:text-yellow-300">About</a>
   <a href="#skills" class="block hover:text-yellow-300">Skills</a>
@@ -182,7 +206,7 @@
   </div>
 </div>
 
-    <ul class="hidden md:flex gap-6 font-semibold text-lg items-center">
+    <ul class="hidden md:flex gap-6 font-semibold text-lg items-center ">
       
       <li><a href="#home"         class="hover:text-yellow-300 transition">Home</a></li>
       <li><a href="#about"        class="hover:text-yellow-300 transition">About</a></li>
@@ -190,7 +214,7 @@
       <li><a href="#projects"     class="hover:text-yellow-300 transition">Projects</a></li>
       <li><a href="#testimonials" class="hover:text-yellow-300 transition">Testimonials</a></li>
       <li><a href="#contact"      class="hover:text-yellow-300 transition">Contact</a></li>
-      <li class="relative resume-dropdown" id="resumeDropdown">
+      <li class="relative resume-dropdown hover-boom" id="resumeDropdown">
         <button class="px-4 py-2 bg-gradient-to-r from-sky-400 via-pink-400 to-pink-600 text-white rounded-md shadow-md hover:opacity-90 transition">
   Resume
 </button>
@@ -200,7 +224,7 @@
           <a href="Aryendra_Designer_Resume.pdf"      target="_blank" class="block px-4 py-2 hover:bg-gray-100 flex items-center gap-2"><i class="fa-solid fa-palette"></i> Designer Resume</a>
         </div>
       </li>
-      <li class="relative resume-dropdown" id="galleryDropdown">
+      <li class="relative resume-dropdown hover-boom" id="galleryDropdown">
         <button class="px-4 py-2 bg-gradient-to-r from-sky-400 via-pink-400 to-pink-600 text-white rounded-md shadow-md hover:opacity-90 transition">
   Gallery
 </button>
@@ -215,6 +239,7 @@
       
     </ul>
   </div>
+  
 </nav>
 
 
@@ -440,7 +465,21 @@ galleryMenu.addEventListener('mouseleave', () => {
     alert("⚠️ Error submitting form.");
   });
 });
+//navbar
+let prevScrollPos = window.scrollY;
+  const navbar = document.querySelector('nav');
 
+  window.addEventListener('scroll', () => {
+    const currentScrollPos = window.scrollY;
+
+    if (prevScrollPos > currentScrollPos) {
+      navbar.style.top = "0"; // scroll up – show navbar
+    } else {
+      navbar.style.top = "-100px"; // scroll down – hide navbar
+    }
+
+    prevScrollPos = currentScrollPos;
+  });
 
 
 </script>
