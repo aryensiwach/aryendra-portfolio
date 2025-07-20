@@ -47,9 +47,9 @@
   }
 
   .glow-link:hover {
-    color: white;
+    color: rgb(255, 255, 255);
     transform: scale(1.25);
-    filter: drop-shadow(0 0 10px white) drop-shadow(0 0 2px #00bfff) drop-shadow(0 0 3px #00bfff);
+    filter: drop-shadow(0 0 10px rgb(0, 0, 0)) drop-shadow(0 0 2px #00bfff) drop-shadow(0 0 3px #00bfff);
   }
     .typed-cursor { font-weight: bold; font-size: 24px; }
     .glow-text {
@@ -91,14 +91,19 @@
 
 .cursor-dot {
   position: fixed;
-  width: 10px;
-  height: 10px;
+  width: 8px;
+  height: 8px;
   border-radius: 50%;
   pointer-events: none;
-  background: radial-gradient(circle, #ff00a6, transparent);
-  opacity: 0.6;
+  background: #fff700;
+  box-shadow:
+    0 0 6px #fff700,
+    0 0 12px #fff700,
+    0 0 20px #fff700,
+    0 0 30px #fff700;
+  opacity: 0.8;
   z-index: 9999;
-  animation: trail-fade 0.5s ease-out forwards;
+  animation: trail-fade 0.05s ease-out forwards;
 }
 
 @keyframes trail-fade {
@@ -129,7 +134,7 @@ nav::before {
   </style>
 </head>
 
-<body class="text-gray-900 bg-white">
+<body class="text-white-900 bg-black">
 
 
 
@@ -139,22 +144,22 @@ nav::before {
      <!-- Animated Blob Background -->
 <div class="absolute inset-0 -z-10 overflow-hidden pointer-events-none">
   <!-- Blob 1 -->
-  <svg class="absolute top-[-100px] left-[-100px] w-[350px] h-[350px] opacity-100 animate-blob" viewBox="0 0 200 200">
+  <svg class="absolute top-[-100px] left-[-100px] w-[350px] h-[350px] opacity-50 animate-blob" viewBox="0 0 200 200">
     <path fill="#00CFFF" d="M43.5,-58.2C56.1,-49.9,66.1,-37.2,66.5,-24.6C66.9,-11.9,57.7,0.6,51.3,14.5C44.9,28.4,41.4,43.7,32.1,54.1C22.7,64.4,7.5,69.8,-7.2,70.3C-21.8,70.8,-36,66.5,-45.9,56.5C-55.8,46.6,-61.5,30.9,-62.8,16.1C-64.2,1.2,-61.3,-12.6,-54.6,-24.2C-48,-35.9,-37.5,-45.5,-25.5,-54.1C-13.5,-62.7,0,-70.2,13.2,-68.6C26.4,-67,39.3,-56.4,43.5,-58.2Z" transform="translate(100 100)" />
   </svg>
 
   <!-- Blob 2 -->
-  <svg class="absolute top-[50%] left-[-150px] w-[300px] h-[300px] opacity-100 animate-blob2" viewBox="0 0 200 200">
+  <svg class="absolute top-[50%] left-[-150px] w-[300px] h-[300px] opacity-50 animate-blob2" viewBox="0 0 200 200">
     <path fill="#FF60A8" d="M43.5,-58.2C56.1,-49.9,66.1,-37.2,66.5,-24.6C66.9,-11.9,57.7,0.6,51.3,14.5C44.9,28.4,41.4,43.7,32.1,54.1C22.7,64.4,7.5,69.8,-7.2,70.3C-21.8,70.8,-36,66.5,-45.9,56.5C-55.8,46.6,-61.5,30.9,-62.8,16.1C-64.2,1.2,-61.3,-12.6,-54.6,-24.2C-48,-35.9,-37.5,-45.5,-25.5,-54.1C-13.5,-62.7,0,-70.2,13.2,-68.6C26.4,-67,39.3,-56.4,43.5,-58.2Z" transform="translate(100 100)" />
   </svg>
 
   <!-- Blob 3 -->
-  <svg class="absolute bottom-[-120px] right-[-150px] w-[400px] h-[400px] opacity-100 animate-blob3" viewBox="0 0 200 200">
+  <svg class="absolute bottom-[-120px] right-[-150px] w-[400px] h-[400px] opacity-50 animate-blob3" viewBox="0 0 200 200">
     <path fill="#A962FF" d="M43.5,-58.2C56.1,-49.9,66.1,-37.2,66.5,-24.6C66.9,-11.9,57.7,0.6,51.3,14.5C44.9,28.4,41.4,43.7,32.1,54.1C22.7,64.4,7.5,69.8,-7.2,70.3C-21.8,70.8,-36,66.5,-45.9,56.5C-55.8,46.6,-61.5,30.9,-62.8,16.1C-64.2,1.2,-61.3,-12.6,-54.6,-24.2C-48,-35.9,-37.5,-45.5,-25.5,-54.1C-13.5,-62.7,0,-70.2,13.2,-68.6C26.4,-67,39.3,-56.4,43.5,-58.2Z" transform="translate(100 100)" />
   </svg>
 
   <!-- Blob 4 -->
-  <svg class="absolute top-[30%] right-[10%] w-[250px] h-[250px] opacity-100 animate-blob4" viewBox="0 0 200 200">
+  <svg class="absolute top-[30%] right-[10%] w-[250px] h-[250px] opacity-50 animate-blob4" viewBox="0 0 200 200">
     <path fill="#F9C74F" d="M43.5,-58.2C56.1,-49.9,66.1,-37.2,66.5,-24.6C66.9,-11.9,57.7,0.6,51.3,14.5C44.9,28.4,41.4,43.7,32.1,54.1C22.7,64.4,7.5,69.8,-7.2,70.3C-21.8,70.8,-36,66.5,-45.9,56.5C-55.8,46.6,-61.5,30.9,-62.8,16.1C-64.2,1.2,-61.3,-12.6,-54.6,-24.2C-48,-35.9,-37.5,-45.5,-25.5,-54.1C-13.5,-62.7,0,-70.2,13.2,-68.6C26.4,-67,39.3,-56.4,43.5,-58.2Z" transform="translate(100 100)" />
   </svg>
 </div>
@@ -164,7 +169,7 @@ nav::before {
   
 
 <!-- NAVBAR -->
-<nav class="fixed top-0 left-0 w-full z-50 px-2 py-0.1 backdrop-blur-[30px] bg-gradient-to-r from-white/10 via-white/5 to-white/10 shadow-lg border-b border-white/10 rounded-b-xl transition-all duration-500 ease-in-out">
+<nav class="fixed top-0 left-0 w-full z-50 px-2 py-0.1 backdrop-blur-[30px] bg-gradient-to-r from-black/10 via-black/5 to-black/10 shadow-lg border-b border-white/10 rounded-b-xl transition-all duration-500 ease-in-out">
 
  
 
@@ -181,7 +186,7 @@ nav::before {
 
 
     <!-- ✅ Mobile Menu with Resume and Gallery -->
-<div id="mobile-menu" class="md:hidden hidden mt-4 space-y-2 text-lg backdrop-blur-xl bg-gradient-to-r from-white/10 via-white/5 to-white/10 p-4 rounded-b-xl text-black border-t border-white/10 shadow-lg">
+<div id="mobile-menu" class="md:hidden hidden mt-4 space-y-2 text-lg backdrop-blur-xl bg-gradient-to-r from-white/10 via-white/5 to-white/10 p-4 rounded-b-xl text-white border-t border-white/10 shadow-lg">
 
 
   <a href="#home" class="block hover:text-yellow-300">Home</a>
@@ -214,7 +219,7 @@ nav::before {
   </div>
 </div>
 
-    <ul class="hidden md:flex gap-6 font-semibold text-lg items-center ">
+    <ul class="hidden md:flex gap-6 font-semibold text-lg items-center text-white">
       
       <a href="#home" class="glow-link">Home</a>
   <a href="#about" class="glow-link">About</a>
@@ -276,24 +281,24 @@ nav::before {
 
 
   <!-- ABOUT -->
-  <section id="about" class="py-20 bg-white bg-opacity-50 text-center" data-aos="fade-up">
+  <section id="about" class="py-20 bg-white bg-opacity-5 text-center" data-aos="fade-up">
     <div class="max-w-4xl mx-auto px-6">
       <h2 class="text-4xl font-bold text-blue-600 mb-8 hover-boom">About Me</h2>
-      <p class="text-lg leading-relaxed">
+      <p class="text-lg leading-relaxed text-white">
         I'm <span class="text-pink-600 font-bold">Aryendra Chaudhary</span>, a B.Tech IT student who <span class="italic">codes like an engineer</span> and <span class="italic">edits like an artist</span>. I’ve grown an Instagram audience of 70M+ views by blending memes & motion graphics, and I’ve solved 400+ coding problems while freelancing as a video editor.
       </p>
-      <p class="mt-4 text-lg leading-relaxed">
+      <p class="mt-4 text-lg leading-relaxed text-white">
         <strong>Fun fact:</strong> My reel with a Granny crossed <span class="text-pink-600 font-bold">70 million</span> views overnight!
       </p>
     </div>
   </section>
 
-  <section id="skills" class="py-20 bg-white bg-opacity-40 text-center" data-aos="fade-up">
-  <h2 class="text-4xl font-bold mb-10 text-purple-700 hover-boom">My Superpowers</h2>
+  <section id="skills" class="py-20 bg-black bg-opacity-10 text-center" data-aos="fade-up">
+  <h2 class="text-4xl font-bold mb-10 text-blue-700 hover-boom ">My Superpowers</h2>
   <div class="grid md:grid-cols-2 gap-10 max-w-6xl mx-auto px-6">
 
     <!-- Engineering Skills -->
-    <div class="bg-white border-4 border-blue-400 p-8 rounded-xl shadow-xl hover:scale-105 transition duration-300 relative">
+    <div class="text-white bg-black bg-opacity-10 border-4 border-blue-400 p-8 rounded-xl shadow-xl hover:scale-105 transition duration-300 relative">
       <h3 class="text-2xl font-bold mb-4 text-blue-700">💻 Engineering Skills</h3>
       <ul class="text-left list-disc list-inside space-y-2">
         <li>C++, Python, JavaScript</li>
@@ -303,14 +308,14 @@ nav::before {
         <li>Git, GitHub</li>
       </ul>
       <a href="aryendra_chaudhary_resume_2025.pdf" target="_blank"
-  class="bottom-4 right-4 bg-blue-100 border border-blue-500 text-blue-700 font-semibold text-sm px-3 py-1 rounded-full shadow-md hover:bg-blue-200 transition 
+  class="text-white bottom-4 right-4 bg-black bg-opacity-10 border border-blue-500 text-blue-700 font-semibold text-sm px-3 py-1 rounded-full shadow-md hover:bg-blue-800 transition 
          md:absolute md:bottom-4 md:right-4 mt-6 inline-block hover-boom">
   🔗 View Resume
 </a>
     </div>
 
     <!-- Editing & Design Skills -->
-    <div class="bg-white border-4 border-pink-400 p-8 rounded-xl shadow-xl hover:scale-105 transition duration-300 relative">
+    <div class="text-white bg-black bg-opacity-10 border-4 border-pink-400 p-8 rounded-xl shadow-xl hover:scale-105 transition duration-300 relative ">
       <h3 class="text-2xl font-bold mb-4 text-pink-600">🎨 Editing & Design Skills</h3>
       <ul class="text-left list-disc list-inside space-y-2">
         <li>Adobe Premiere Pro, After Effects, Davinchi Resolve</li>
@@ -319,8 +324,8 @@ nav::before {
         <li>Typography: Kinetic Typography, Animated Text Effects</li>
         <li>Meme & Viral Content Creation</li>
       </ul>
-      <a href="Aryendra_designer_resume.pdf" target="_blank"
-  class="bottom-4 right-4 bg-pink-100 border border-pink-500 text-pink-700 font-semibold text-sm px-3 py-1 rounded-full shadow-md hover:bg-pink-200 transition 
+      <a href="Aryendra_Designer_Resume.pdf" target="_blank"
+  class="text-white bottom-4 right-4 bg-black bg-opacity-10 border border-pink-500 text-blue-700 font-semibold text-sm px-3 py-1 rounded-full shadow-md hover:bg-pink-800 transition 
          md:absolute md:bottom-4 md:right-4 mt-6 inline-block hover-boom">
   🔗 View Resume
 </a>
@@ -335,7 +340,7 @@ nav::before {
 
 
   <!-- PROJECTS -->
-<section id="projects" class="py-20 bg-white bg-opacity-50 text-center" data-aos="fade-up">
+<section id="projects" class="py-20 bg-white bg-opacity-5 text-center" data-aos="fade-up">
   <h2 class="text-4xl font-bold text-blue-600 mb-10 hover-boom">Projects</h2>
 
   <div class="max-w-6xl mx-auto grid md:grid-cols-2 gap-8 px-6">
@@ -343,23 +348,23 @@ nav::before {
     <div class="space-y-6">
       
       <!-- Project 1 -->
-      <div class="bg-blue-100 p-6 pb-14 rounded-lg shadow-lg border-l-8 border-blue-400 hover:scale-105 transform transition duration-300 relative">
-        <h3 class="text-xl font-bold mb-1">📁 Face Recg Based Attendance System</h3>
+      <div class="text-white bg-blue-700 bg-opacity-10 p-6 pb-14 rounded-lg shadow-lg border-l-8 border-blue-400 hover:scale-105 transform transition duration-300 relative">
+        <h3 class="text-xl font-bold mb-1 ">📁 Face Recg Based Attendance System</h3>
         <p>Automatically marks attendance using face recognition using OpenCV and haarcascade.</p>
         <p class="mt-2 text-sm"><strong>Tech Used:</strong> Python, OS Library</p>
         <a href="https://github.com/aryensiwach/Face-Recognition-Attendance-System" target="_blank"
-          class="absolute bottom-4 left-1/2 transform -translate-x-1/2 md:left-auto md:right-4 md:transform-none bg-blue-200 text-blue-800 text-sm font-medium px-3 py-1 rounded-full shadow hover:bg-blue-300 transition hover-boom">
+          class="text-white font-semibold absolute bottom-4 left-1/2 transform -translate-x-1/2 md:left-auto md:right-4 md:transform-none bg-black bg-opacity-10 border border-blue-400 text-blue-800 text-sm font-medium px-3 py-1 rounded-full shadow hover:bg-blue-800 transition hover-boom">
           🔗 GitHub
         </a>
       </div>
 
       <!-- Project 2 -->
-      <div class="bg-blue-100 p-6 pb-14 rounded-lg shadow-lg border-l-8 border-blue-400 hover:scale-105 transform transition duration-300 relative">
+      <div class="text-white bg-blue-700 bg-opacity-10 p-6 pb-14 rounded-lg shadow-lg border-l-8 border-blue-400 hover:scale-105 transform transition duration-300 relative">
         <h3 class="text-xl font-bold mb-1">🧾 Super Market Billing System</h3>
         <p>Designed a console-based billing system to manage inventory, pricing, and receipts.</p>
         <p class="mt-2 text-sm"><strong>Tech Used:</strong> C++, OS Library, File Handling, OOPS</p>
         <a href="https://github.com/aryensiwach/Supermarket-Billing-System" target="_blank"
-          class="absolute bottom-4 left-1/2 transform -translate-x-1/2 md:left-auto md:right-4 md:transform-none bg-blue-200 text-blue-800 text-sm font-medium px-3 py-1 rounded-full shadow hover:bg-blue-300 transition hover-boom">
+          class="text-white font-semibold absolute bottom-4 left-1/2 transform -translate-x-1/2 md:left-auto md:right-4 md:transform-none bg-black bg-opacity-10 border border-blue-400 text-blue-800 text-sm font-medium px-3 py-1 rounded-full shadow hover:bg-blue-800 transition hover-boom">
           🔗 GitHub
         </a>
       </div>
@@ -370,23 +375,23 @@ nav::before {
     <div class="space-y-6">
       
       <!-- Project 3 -->
-      <div class="bg-pink-100 p-6 pb-14 rounded-lg shadow-lg border-l-8 border-pink-400 hover:scale-105 transform transition duration-300 relative">
+      <div class="text-white bg-pink-700 bg-opacity-10 p-6 pb-14 rounded-lg shadow-lg border-l-8 border-pink-400 hover:scale-105 transform transition duration-300 relative">
         <h3 class="text-xl font-bold mb-1">🎮 Fitness Transformation Edit</h3>
         <p>High-energy Instagram Transformation reels with perfect cuts, audio sync & humor.</p>
         <p class="mt-2 text-sm"><strong>Tools:</strong> Premiere Pro, After Effects, Photoshop</p>
         <a href="https://www.instagram.com/tera-page-ya-post-link" target="_blank"
-          class="absolute bottom-4 left-1/2 transform -translate-x-1/2 md:left-auto md:right-4 md:transform-none bg-pink-200 text-pink-800 text-sm font-medium px-3 py-1 rounded-full shadow hover:bg-pink-300 transition hover-boom">
+          class="text-white font-semibold absolute bottom-4 left-1/2 transform -translate-x-1/2 md:left-auto md:right-4 md:transform-none bg-black bg-opacity-10 border border-pink-400 text-blue-800 text-sm font-medium px-3 py-1 rounded-full shadow hover:bg-pink-800 transition hover-boom">
           🔗 
         </a>
       </div>
 
       <!-- Project 4 -->
-      <div class="bg-pink-100 p-6 pb-14 rounded-lg shadow-lg border-l-8 border-pink-400 hover:scale-105 transform transition duration-300 relative">
+      <div class="text-white bg-pink-700 bg-opacity-10 p-6 pb-14 rounded-lg shadow-lg border-l-8 border-pink-400 hover:scale-105 transform transition duration-300 relative">
         <h3 class="text-xl font-bold mb-1">🎬 Fitness Brand Reel – BigMuscles Nutrition</h3>
         <p>High-impact gym promo reel featuring fast cuts, intense sound sync, and motion.</p>
         <p class="mt-2 text-sm"><strong>Tools:</strong> Premiere Pro, After Effects</p>
         <a href="https://www.instagram.com/tera-reel-link" target="_blank"
-          class="absolute bottom-4 left-1/2 transform -translate-x-1/2 md:left-auto md:right-4 md:transform-none bg-pink-200 text-pink-800 text-sm font-medium px-3 py-1 rounded-full shadow hover:bg-pink-300 transition hover-boom">
+          class="text-white font-semibold absolute bottom-4 left-1/2 transform -translate-x-1/2 md:left-auto md:right-4 md:transform-none bg-black bg-opacity-10 border border-pink-400 text-blue-800 text-sm font-medium px-3 py-1 rounded-full shadow hover:bg-pink-800 transition hover-boom">
           🔗 
         </a>
       </div>
@@ -397,35 +402,35 @@ nav::before {
 
 
   <!-- TESTIMONIALS -->
-  <section id="testimonials" class="py-20 bg-white bg-opacity-40 text-center" data-aos="fade-up">
+  <section id="testimonials" class="py-20 bg-black bg-opacity-10 text-center" data-aos="fade-up">
     <h2 class="text-4xl font-bold text-blue-700 mb-8 hover-boom">Testimonials</h2>
     <div class="max-w-4xl mx-auto grid md:grid-cols-2 gap-8 px-6">
-      <div class="bg-white p-6 rounded-xl shadow-lg border-l-8 border-blue-400 hover:scale-105 transition duration-300">
-        <p class="italic">“"Accurate, fast, and super easy to use. This face recognition system has saved us hours of manual work!”</p>
+      <div class="p-6 rounded-xl shadow-lg border-l-8 border-blue-400 bg-black bg-opacity-10 hover:scale-105 transition duration-300">
+        <p class="italic text-white">“"Accurate, fast, and super easy to use. This face recognition system has saved us hours of manual work!”</p>
         <p class="mt-4 font-bold text-blue-600">— Project Lead</p>
       </div>
-      <div class="bg-white p-6 rounded-xl shadow-lg border-l-8 border-blue-400 hover:scale-105 transition duration-300">
-        <p class="italic">“Aryendra’s editing turned our dull footage into a blockbuster promo in just 24 hours. Highly recommended!”</p>
+      <div class="p-6 rounded-xl shadow-lg border-l-8 border-pink-400 bg-black bg-opacity-10 hover:scale-105 transition duration-300">
+        <p class="italic text-white">“Aryendra’s editing turned our dull footage into a blockbuster promo in just 24 hours. Highly recommended!”</p>
         <p class="mt-4 font-bold text-blue-600">— Client</p>
       </div>
     </div>
   </section>
 
   <!-- CONTACT -->
-  <section id="contact" class="py-20 bg-white bg-opacity-50 text-center" data-aos="fade-up">
+  <section id="contact" class="py-20 bg-white bg-opacity-5 text-center" data-aos="fade-up">
     <h2 class="text-4xl font-bold text-blue-700 mb-6 hover-boom">Contact Me</h2>
-    <p class="mb-6 text-lg">Want to collaborate or just say hi? Drop a message below 👇</p>
-    <form id="contact-form" action="https://script.google.com/macros/s/AKfycbxjoXj1pH8RsXXQwhBUtSgjlqZvk3mQn2EcmBpem1v8DiveMecDwdb8QQ2yYNFRlhxi/exec" method="POST" class="bg-white max-w-lg mx-auto p-8 rounded-xl shadow-md border-4 border-dashed border-yellow-400 space-y-4">
+    <p class="mb-6 text-lg text-white">Want to collaborate or just say hi? Drop a message below 👇</p>
+    <form id="contact-form" action="https://script.google.com/macros/s/AKfycbxjoXj1pH8RsXXQwhBUtSgjlqZvk3mQn2EcmBpem1v8DiveMecDwdb8QQ2yYNFRlhxi/exec" method="POST" class="bg-black bg-opacity-10 max-w-lg mx-auto p-8 rounded-xl shadow-md border-4 border-dashed border-yellow-500 space-y-4">
       <div id="form-status" class="mt-4 text-green-600 font-bold hidden">
   ✅ Message sent successfully!
 </div>
 
-      <input type="text"  name="name"    placeholder="Your Name"     required class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-yellow-400" />
-      <input type="email" name="email"   placeholder="Your Email"    required class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-yellow-400" />
-      <textarea name="message" rows="4"  placeholder="Your Message"  required class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-yellow-400"></textarea>
+      <input type="text"  name="name"    placeholder="Your Name"     required class="w-full bg-black bg-opacity-40 border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-yellow-500" />
+      <input type="email" name="email"   placeholder="Your Email"    required class="w-full bg-black bg-opacity-40 border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-yellow-500" />
+      <textarea name="message" rows="4"  placeholder="Your Message"  required class="w-full bg-black bg-opacity-40 border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-yellow-500"></textarea>
       <button type="submit" class="bg-red-500 text-white font-bold px-6 py-3 rounded-full shadow-lg hover-boom">💬 SUBMIT!</button>
     </form>
-    <div class="mt-8 flex justify-center gap-6 text-3xl text-gray-700">
+    <div class="mt-8 flex justify-center gap-6 text-3xl text-white-700">
       <a href="https://www.instagram.com/aryendra_chaudhary17" target="_blank" class="hover:text-pink-500"><i class="fab fa-instagram"></i></a>
       <a href="https://github.com/aryensiwach"                target="_blank" class="hover:text-black"><i class="fab fa-github"></i></a>
       <a href="https://www.linkedin.com/in/aryendra-chaudhary-97922224b/"           target="_blank" class="hover:text-blue-600"><i class="fab fa-linkedin"></i></a>
@@ -500,6 +505,7 @@ galleryMenu.addEventListener('mouseleave', () => {
       setTimeout(() => dot.remove(), 500);
     });
   }
+
 
   document.getElementById("contact-form").addEventListener("submit", function (e) {
   e.preventDefault(); 
