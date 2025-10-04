@@ -19,6 +19,10 @@
           },
           colors: {
             'brand-red': '#FF0000',
+          },
+            animation: {
+            'spin-slow': 'spin 3s linear infinite',
+            'pulse-subtle': 'pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite',
           }
         }
       }
@@ -55,7 +59,6 @@
       text-shadow: 2px 2px 8px rgba(255,255,255,0.2);
     }
     
-    /* 3D Card Tilt Effect */
     .card-3d {
         transform-style: preserve-3d;
         transition: transform 0.4s ease, box-shadow 0.4s ease;
@@ -80,7 +83,6 @@
         animation: pulse-animation 2s infinite;
     }
     
-    /* Custom Timeline Styles */
     .timeline-item::before {
         content: '';
         position: absolute;
@@ -96,17 +98,58 @@
         border-color: #1C1C1C;
     }
     @media (min-width: 768px) {
-        .timeline-item.left::before {
-            left: -0.8rem;
-        }
-        .timeline-item.right::before {
-            right: -0.8rem;
-        }
+        .timeline-item.left::before { left: -0.8rem; }
+        .timeline-item.right::before { right: -0.8rem; }
     }
     @media (max-width: 767px) {
-        .timeline-item::before {
-            left: -0.7rem; /* Adjusted for mobile view */
+        .timeline-item::before { left: -0.7rem; }
+    }
+
+    /* AI Chat Scrollbar */
+    #ai-chat-history::-webkit-scrollbar { width: 6px; }
+    #ai-chat-history::-webkit-scrollbar-track { background: transparent; }
+    #ai-chat-history::-webkit-scrollbar-thumb { background: #888; border-radius: 3px; }
+    #ai-chat-history::-webkit-scrollbar-thumb:hover { background: #555; }
+    .dark #ai-chat-history::-webkit-scrollbar-thumb { background: #555; }
+    .dark #ai-chat-history::-webkit-scrollbar-thumb:hover { background: #888; }
+
+    /* Back to Top Button */
+    #back-to-top-btn {
+      position: fixed;
+      bottom: 2rem;
+      left: 2rem;
+      background-color: #FF0000;
+      color: white;
+      width: 3.5rem;
+      height: 3.5rem;
+      border-radius: 50%;
+      display: none; /* Initially hidden */
+      justify-content: center;
+      align-items: center;
+      font-size: 1.25rem;
+      z-index: 40;
+      transition: opacity 0.3s, transform 0.3s;
+      opacity: 0;
+      transform: translateY(100px);
+      border: none;
+    }
+    #back-to-top-btn.show {
+      display: flex;
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* AI Assistant Button Glow */
+    @keyframes pulse-glow {
+        0%, 100% {
+            box-shadow: 0 0 20px rgba(255, 0, 0, 0.4);
         }
+        50% {
+            box-shadow: 0 0 35px rgba(255, 0, 0, 0.8);
+        }
+    }
+    #ai-assistant-button {
+        animation: pulse-glow 2.5s infinite ease-in-out;
     }
   </style>
 </head>
@@ -125,11 +168,8 @@
           <a href="#contact" class="hover:text-brand-red transition-colors duration-300">CONTACT</a>
       </div>
 
-      <!-- MOBILE FIX: Added flex-shrink-0 to prevent this container from being squished -->
       <div class="flex items-center gap-4 flex-shrink-0">
-        <a href="#resumes" class="hidden md:inline-block px-4 py-2 border-2 border-brand-red text-brand-red font-bold text-sm tracking-wider hover:bg-brand-red hover:text-white dark:hover:text-black transition-all duration-300">
-            RESUME
-        </a>
+        <a href="#resumes" class="hidden md:inline-block px-4 py-2 border-2 border-brand-red text-brand-red font-bold text-sm tracking-wider hover:bg-brand-red hover:text-white dark:hover:text-black transition-all duration-300">RESUME</a>
         <button id="theme-toggle" class="text-xl text-gray-600 dark:text-gray-400 hover:text-brand-red dark:hover:text-brand-red transition-colors">
           <svg id="theme-toggle-dark-icon" class="hidden w-6 h-6" fill="currentColor" viewBox="0 0 20 20"><path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path></svg>
           <svg id="theme-toggle-light-icon" class="hidden w-6 h-6" fill="currentColor" viewBox="0 0 20 20"><path d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm-.707 10.607a1 1 0 010-1.414l.707-.707a1 1 0 111.414 1.414l-.707.707a1 1 0 01-1.414 0zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" fill-rule="evenodd" clip-rule="evenodd"></path></svg>
@@ -137,7 +177,6 @@
         <button id="menu-btn" class="text-2xl text-gray-900 dark:text-white md:hidden"><i class="fas fa-bars"></i></button>
       </div>
     </div>
-    <!-- Mobile Menu -->
     <div id="mobile-menu" class="hidden md:hidden bg-white/95 dark:bg-[#181818]/95 backdrop-blur-lg">
         <a href="#about" class="block py-4 px-6 text-center font-semibold hover:text-brand-red">ABOUT</a>
         <a href="#experience" class="block py-4 px-6 text-center font-semibold hover:text-brand-red">JOURNEY</a>
@@ -149,13 +188,13 @@
 
   <!-- HERO SECTION -->
   <header id="home" class="min-h-screen flex items-center justify-center text-center px-4 relative overflow-hidden">
-     <div id="three-bg" class="absolute inset-0 z-0"></div>
-     <div class="z-10" data-aos="fade-up">
-      <h1 id="hero-title" class="font-heading text-5xl sm:text-6xl md:text-9xl text-gray-900 dark:text-white text-shadow-custom">ARYENDRA CHAUDHARY</h1>
-      <p class="text-xl md:text-2xl text-gray-700 dark:text-gray-300 mt-4 font-medium">
-        <span id="typingText" class="font-semibold text-brand-red"></span>
-      </p>
-    </div>
+   <div id="three-bg" class="absolute inset-0 z-0"></div>
+   <div class="z-10" data-aos="fade-up">
+     <h1 id="hero-title" class="font-heading text-5xl sm:text-6xl md:text-9xl text-gray-900 dark:text-white text-shadow-custom">ARYENDRA CHAUDHARY</h1>
+     <p class="text-xl md:text-2xl text-gray-700 dark:text-gray-300 mt-4 font-medium">
+       <span id="typingText" class="font-semibold text-brand-red"></span>
+     </p>
+   </div>
   </header>
 
   <main class="max-w-7xl mx-auto px-6">
@@ -163,13 +202,16 @@
     <section id="about" class="py-24" data-aos="fade-up">
         <div class="grid md:grid-cols-3 gap-12 items-center">
             <div class="md:col-span-1" data-aos="fade-right">
-                <!-- MOBILE FIX: Changed to rounded-lg and object-cover to make it a proper square -->
-                <img src="IMG_8078.JPG" alt="Aryendra Chaudhary" class="rounded-lg w-64 h-64 object-cover mx-auto border-4 border-brand-red md:border-none md:w-full md:h-auto md:rounded-lg card-3d shadow-lg">
+                <div class="relative w-64 h-64 md:w-full md:h-auto mx-auto group">
+                    <img src="IMG_8078.JPG" alt="Aryendra Chaudhary" class="rounded-lg w-full h-full object-cover shadow-lg">
+                    <div class="absolute inset-0 rounded-lg ring-4 ring-brand-red/50 ring-offset-4 ring-offset-white dark:ring-offset-[#121212] transition-transform duration-300 transform group-hover:scale-105"></div>
+                </div>
             </div>
             <div class="md:col-span-2 text-center md:text-left" data-aos="fade-left">
-                <h2 class="section-heading text-5xl text-gray-900 dark:text-white">WHO AM I?</h2>
+                <h2 class="section-heading text-5xl text-gray-900 dark:text-white">A Bit About Me</h2>
                 <div class="max-w-4xl mx-auto md:mx-0 text-lg md:text-xl text-gray-600 dark:text-gray-400 leading-relaxed mt-8 space-y-4">
-                    <p>Results-driven Developer and Video Editor with 3+ years of experience creating compelling short-form video content and robust software solutions. Proven ability to drive massive audience engagement, amassing over 70 million cross-platform views while honing my problem-solving skills with over 400+ coding challenges.</p>
+                    <p>I'm a passionate creator who thrives at the intersection of technology and art. With over three years of experience, I've dedicated myself to two crafts: building robust software solutions and producing captivating video content. This dual focus allows me to approach problems with both an engineer's logic and an artist's eye for detail.</p>
+                    <p>On the digital front, I've successfully driven audience engagement past 70 million views, while my analytical side has conquered over 400 coding challenges. Whether I'm architecting a new system or directing a final cut, my goal is always the same: to create impactful experiences that resonate and deliver results.</p>
                 </div>
             </div>
         </div>
@@ -178,32 +220,28 @@
     <!-- JOURNEY (EDUCATION & EXPERIENCE) TIMELINE SECTION -->
     <section id="experience" class="py-24" data-aos="fade-up">
         <div class="text-center mb-24">
-            <h2 class="section-heading text-5xl text-gray-900 dark:text-white">MY JOURNEY</h2>
+            <h2 class="section-heading text-5xl text-gray-900 dark:text-white">My Journey</h2>
             <p class="text-lg text-gray-600 dark:text-gray-400 mt-2">A timeline of my professional and academic path.</p>
         </div>
         <div class="relative">
-            <!-- The vertical timeline bar -->
             <div class="hidden md:block absolute w-1 bg-brand-red h-full top-0 left-1/2 -translate-x-1/2"></div>
             <div class="md:hidden absolute w-1 bg-brand-red h-full top-0 left-2"></div>
 
             <div class="space-y-12 md:space-y-0">
-                <!-- Timeline Item: Icon.com (Future) -->
                 <div class="md:grid md:grid-cols-2 md:gap-x-12 relative">
-                     <!-- MOBILE FIX: Increased padding to pl-12 and changed ul to list-outside -->
                      <div class="md:pr-12 md:text-right border-r-transparent timeline-item left pl-12 md:pl-0" data-aos="fade-right">
-                        <h3 class="text-2xl font-bold">Video Editor (Freelance)</h3>
-                        <p class="text-lg font-semibold text-brand-red">Icon.com (Digital Media Agency)</p>
-                        <p class="text-sm text-gray-500 dark:text-gray-400 mb-4">May 2025 – Sept 2025 | Remote</p>
-                        <ul class="list-disc list-outside ml-5 space-y-2 text-gray-600 dark:text-gray-400">
-                            <li>Edited and delivered over 30 short-form promotional videos.</li>
-                            <li>Collaborated with marketing teams to increase social engagement.</li>
-                            <li>Utilized After Effects for custom motion graphics.</li>
-                        </ul>
-                    </div>
+                         <h3 class="text-2xl font-bold">Video Editor (Freelance)</h3>
+                         <p class="text-lg font-semibold text-brand-red">Icon.com (Digital Media Agency)</p>
+                         <p class="text-sm text-gray-500 dark:text-gray-400 mb-4">May 2025 – Sept 2025 | Remote</p>
+                         <ul class="list-disc list-outside ml-5 md:ml-0 space-y-2 text-gray-600 dark:text-gray-400">
+                             <li>Delivered over 30 short-form promotional videos for diverse client campaigns, consistently meeting tight deadlines.</li>
+                             <li>Collaborated with marketing teams to translate creative briefs into engaging video strategies.</li>
+                             <li>Created custom motion graphics and text animations using Adobe After Effects to enhance visual storytelling.</li>
+                         </ul>
+                     </div>
                     <div></div>
                 </div>
 
-                <!-- Timeline Item: Instagram Brand -->
                  <div class="md:grid md:grid-cols-2 md:gap-x-12 relative">
                     <div class="md:text-right"></div>
                     <div class="md:pl-12 md:border-l-transparent border-l-4 border-transparent pl-12 timeline-item right" data-aos="fade-left">
@@ -211,13 +249,12 @@
                         <p class="text-lg font-semibold text-brand-red">Self-Managed Instagram Fitness Brand</p>
                         <p class="text-sm text-gray-500 dark:text-gray-400 mb-4">2022 – Present</p>
                         <ul class="list-disc list-outside ml-5 space-y-2 text-gray-600 dark:text-gray-400 text-left">
-                           <li>Built a personal fitness brand from scratch, reaching 20K+ followers and 70M+ total views.</li>
-                            <li>Spearheaded the entire post-production pipeline for 200+ videos, from concept to final cut.</li>
+                            <li>Grew a personal fitness brand from zero to 20K+ followers and 70M+ total views through strategic content.</li>
+                            <li>Managed the entire post-production pipeline for over 200 videos, from initial concept to final upload and community engagement.</li>
                         </ul>
                     </div>
                 </div>
 
-                 <!-- Timeline Item: MIET -->
                 <div class="md:grid md:grid-cols-2 md:gap-x-12 relative">
                     <div class="md:pr-12 md:text-right border-r-transparent timeline-item left pl-12 md:pl-0" data-aos="fade-right">
                         <h3 class="text-2xl font-bold">B.Tech - Information Technology</h3>
@@ -227,7 +264,6 @@
                     <div></div>
                 </div>
 
-                <!-- Timeline Item: 12th Grade -->
                 <div class="md:grid md:grid-cols-2 md:gap-x-12 relative">
                     <div class="md:text-right"></div>
                     <div class="md:pl-12 md:border-l-transparent border-l-4 border-transparent pl-12 timeline-item right" data-aos="fade-left">
@@ -237,13 +273,12 @@
                     </div>
                 </div>
 
-                <!-- Timeline Item: 10th Grade -->
                  <div class="md:grid md:grid-cols-2 md:gap-x-12 relative">
                      <div class="md:pr-12 md:text-right border-r-transparent timeline-item left pl-12 md:pl-0" data-aos="fade-right">
-                        <h3 class="text-2xl font-bold">10th Grade (CBSE)</h3>
-                        <p class="text-lg font-semibold text-brand-red">Dewan Public School</p>
-                        <p class="text-sm text-gray-500 dark:text-gray-400">2020 | Meerut, UP, India</p>
-                    </div>
+                         <h3 class="text-2xl font-bold">10th Grade (CBSE)</h3>
+                         <p class="text-lg font-semibold text-brand-red">Dewan Public School</p>
+                         <p class="text-sm text-gray-500 dark:text-gray-400">2020 | Meerut, UP, India</p>
+                     </div>
                     <div></div>
                 </div>
             </div>
@@ -253,59 +288,55 @@
     <!-- MY WORKFLOW SECTION -->
     <section id="workflow" class="py-24" data-aos="fade-up">
         <div class="text-center mb-16">
-            <h2 class="section-heading text-5xl text-gray-900 dark:text-white">MY WORKFLOW</h2>
+            <h2 class="section-heading text-5xl text-gray-900 dark:text-white">My Workflow</h2>
             <p class="text-lg text-gray-600 dark:text-gray-400 mt-2">A structured approach to bring ideas to life.</p>
         </div>
         <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
-            <!-- Step 1 -->
             <div class="bg-white dark:bg-[#1C1C1C] p-8 rounded-lg card-3d text-center" data-aos="fade-up">
                 <div class="text-4xl text-brand-red mb-4"><i class="fas fa-search"></i></div>
                 <h3 class="text-xl font-bold mb-2">1. Discovery & Strategy</h3>
-                <p class="text-gray-600 dark:text-gray-400">Understanding the project goals and planning the perfect roadmap for execution.</p>
+                <p class="text-gray-600 dark:text-gray-400">I start by thoroughly understanding the project goals to plan a clear and effective roadmap for execution.</p>
             </div>
-            <!-- Step 2 -->
             <div class="bg-white dark:bg-[#1C1C1C] p-8 rounded-lg card-3d text-center" data-aos="fade-up" data-aos-delay="100">
                 <div class="text-4xl text-brand-red mb-4"><i class="fas fa-pencil-ruler"></i></div>
                 <h3 class="text-xl font-bold mb-2">2. Design & Execution</h3>
-                <p class="text-gray-600 dark:text-gray-400">Bringing the vision to life through code or creative editing, with a focus on quality.</p>
+                <p class="text-gray-600 dark:text-gray-400">Here, I bring the vision to life through code or creative editing, with a relentless focus on quality and detail.</p>
             </div>
-            <!-- Step 3 -->
             <div class="bg-white dark:bg-[#1C1C1C] p-8 rounded-lg card-3d text-center" data-aos="fade-up" data-aos-delay="200">
                 <div class="text-4xl text-brand-red mb-4"><i class="fas fa-tasks"></i></div>
                 <h3 class="text-xl font-bold mb-2">3. Review & Refinement</h3>
-                <p class="text-gray-600 dark:text-gray-400">Collaborating on feedback to polish the work until it meets the highest standards.</p>
+                <p class="text-gray-600 dark:text-gray-400">I collaborate on feedback to polish the work until it not only meets but exceeds the highest standards.</p>
             </div>
-            <!-- Step 4 -->
             <div class="bg-white dark:bg-[#1C1C1C] p-8 rounded-lg card-3d text-center" data-aos="fade-up" data-aos-delay="300">
                 <div class="text-4xl text-brand-red mb-4"><i class="fas fa-rocket"></i></div>
                 <h3 class="text-xl font-bold mb-2">4. Delivery & Support</h3>
-                <p class="text-gray-600 dark:text-gray-400">Final delivery of the project, with ongoing support to ensure complete satisfaction.</p>
+                <p class="text-gray-600 dark:text-gray-400">The project is delivered on time, with ongoing support provided to ensure long-term success and satisfaction.</p>
             </div>
         </div>
     </section>
 
     <!-- RESUMES SECTION -->
     <section id="resumes" class="py-24" data-aos="fade-up">
-        <div class="text-center mb-16"><h2 class="section-heading text-5xl text-gray-900 dark:text-white">MY RESUMES</h2></div>
+        <div class="text-center mb-16"><h2 class="section-heading text-5xl text-gray-900 dark:text-white">My Resumes</h2></div>
         <div class="grid lg:grid-cols-2 gap-16">
-            <div class="card-3d" data-aos="fade-right">
+            <div data-aos="fade-right">
                 <h3 class="section-heading text-3xl text-center mb-4">DEVELOPER</h3>
-                <div class="bg-white dark:bg-[#1C1C1C] rounded-lg border-2 border-gray-300 dark:border-gray-800 p-4">
+                <div class="card-3d bg-white dark:bg-[#1C1C1C] rounded-lg border-2 border-gray-300 dark:border-gray-800 p-4">
                     <img src="AryendraChaudhary_resume2025_page-0001.jpg" alt="Developer Resume" class="w-full h-auto rounded">
                 </div>
-                <div class="mt-4 flex gap-4">
-                    <button data-pdf="AryendraChaudhary_resume2025.pdf" class="resume-preview-btn w-1/2 text-center px-6 py-2 border-2 border-brand-red text-brand-red font-bold tracking-wider hover:bg-brand-red hover:text-white dark:hover:text-black transition-all duration-300">PREVIEW</button>
-                    <a href="AryendraChaudhary_resume2025.pdf" download class="w-1/2 text-center px-6 py-2 border-2 border-gray-800 dark:border-gray-200 text-gray-800 dark:text-gray-200 font-bold tracking-wider hover:bg-gray-800 dark:hover:bg-gray-200 hover:text-white dark:hover:text-black transition-all duration-300">DOWNLOAD</a>
+                <div class="mt-6 flex gap-4">
+                    <button data-pdf="AryendraChaudhary_resume2025.pdf" class="resume-preview-btn w-1/2 text-center px-6 py-3 border-2 border-brand-red text-brand-red font-bold tracking-wider hover:bg-brand-red hover:text-white dark:hover:text-black transition-all duration-300 rounded-lg">PREVIEW</button>
+                    <a href="AryendraChaudhary_resume2025.pdf" download class="w-1/2 text-center px-6 py-3 border-2 border-gray-800 dark:border-gray-200 text-gray-800 dark:text-gray-200 font-bold tracking-wider hover:bg-gray-800 dark:hover:bg-gray-200 hover:text-white dark:hover:text-black transition-all duration-300 rounded-lg">DOWNLOAD</a>
                 </div>
             </div>
-            <div class="card-3d" data-aos="fade-left">
+            <div data-aos="fade-left">
                 <h3 class="section-heading text-3xl text-center mb-4">DESIGNER</h3>
-                <div class="bg-white dark:bg-[#1C1C1C] rounded-lg border-2 border-gray-300 dark:border-gray-800 p-4">
+                <div class="card-3d bg-white dark:bg-[#1C1C1C] rounded-lg border-2 border-gray-300 dark:border-gray-800 p-4">
                     <img src="Aryendra_chaudhary_editingResume2025_page-0001.jpg" alt="Designer Resume" class="w-full h-auto rounded">
                 </div>
-                <div class="mt-4 flex gap-4">
-                    <button data-pdf="Aryendra_chaudhary_editingResume2025.pdf" class="resume-preview-btn w-1/2 text-center px-6 py-2 border-2 border-brand-red text-brand-red font-bold tracking-wider hover:bg-brand-red hover:text-white dark:hover:text-black transition-all duration-300">PREVIEW</button>
-                    <a href="Aryendra_chaudhary_editingResume2025.pdf" download class="w-1/2 text-center px-6 py-2 border-2 border-gray-800 dark:border-gray-200 text-gray-800 dark:text-gray-200 font-bold tracking-wider hover:bg-gray-800 dark:hover:bg-gray-200 hover:text-white dark:hover:text-black transition-all duration-300">DOWNLOAD</a>
+                <div class="mt-6 flex gap-4">
+                    <button data-pdf="Aryendra_chaudhary_editingResume2025.pdf" class="resume-preview-btn w-1/2 text-center px-6 py-3 border-2 border-brand-red text-brand-red font-bold tracking-wider hover:bg-brand-red hover:text-white dark:hover:text-black transition-all duration-300 rounded-lg">PREVIEW</button>
+                    <a href="Aryendra_chaudhary_editingResume2025.pdf" download class="w-1/2 text-center px-6 py-3 border-2 border-gray-800 dark:border-gray-200 text-gray-800 dark:text-gray-200 font-bold tracking-wider hover:bg-gray-800 dark:hover:bg-gray-200 hover:text-white dark:hover:text-black transition-all duration-300 rounded-lg">DOWNLOAD</a>
                 </div>
             </div>
         </div>
@@ -314,7 +345,7 @@
     <!-- SHOWREEL SECTION -->
     <section id="showreel" class="py-24" data-aos="fade-up">
         <div class="text-center mb-16">
-            <h2 class="section-heading text-5xl text-gray-900 dark:text-white">MY SHOWREEL</h2>
+            <h2 class="section-heading text-5xl text-gray-900 dark:text-white">My Showreel</h2>
             <p class="text-lg text-gray-600 dark:text-gray-400 mt-2">A Glimpse Into My Creative Work</p>
         </div>
         <div class="max-w-4xl mx-auto rounded-lg overflow-hidden card-3d" data-aos="fade-up">
@@ -328,7 +359,7 @@
     <!-- WORK (SKILLS & PROJECTS) SECTION -->
     <section id="work" class="py-24">
         <div class="text-center mb-16">
-            <h2 class="section-heading text-5xl text-gray-900 dark:text-white">TOOLS & PROJECTS</h2>
+            <h2 class="section-heading text-5xl text-gray-900 dark:text-white">Tools & Projects</h2>
         </div>
 
         <!-- SKILLS WITH PROFICIENCY BARS -->
@@ -336,32 +367,26 @@
             <div data-aos="fade-right">
                 <h3 class="section-heading text-4xl text-gray-900 dark:text-white mb-8">DEVELOPER TOOLS</h3>
                 <div class="bg-white dark:bg-[#1C1C1C] p-8 rounded-lg card-3d space-y-6">
-                    <!-- Skill Item -->
                     <div>
                         <div class="flex justify-between items-center mb-1"><span class="font-semibold text-lg flex items-center gap-3"><i class="devicon-cplusplus-plain text-xl text-brand-red"></i>C++</span><span>95%</span></div>
                         <div class="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2.5"><div class="bg-brand-red h-2.5 rounded-full" style="width: 95%"></div></div>
                     </div>
-                    <!-- Skill Item -->
                     <div>
                         <div class="flex justify-between items-center mb-1"><span class="font-semibold text-lg flex items-center gap-3"><i class="devicon-python-plain text-xl text-brand-red"></i>Python</span><span>85%</span></div>
                         <div class="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2.5"><div class="bg-brand-red h-2.5 rounded-full" style="width: 85%"></div></div>
                     </div>
-                    <!-- Skill Item -->
                      <div>
                         <div class="flex justify-between items-center mb-1"><span class="font-semibold text-lg flex items-center gap-3"><i class="fas fa-laptop-code text-xl text-brand-red"></i>DSA & OOP</span><span>95%</span></div>
                         <div class="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2.5"><div class="bg-brand-red h-2.5 rounded-full" style="width: 95%"></div></div>
                     </div>
-                    <!-- Skill Item -->
                     <div>
                         <div class="flex justify-between items-center mb-1"><span class="font-semibold text-lg flex items-center gap-3"><i class="devicon-mysql-plain text-xl text-brand-red"></i>MySQL</span><span>80%</span></div>
                         <div class="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2.5"><div class="bg-brand-red h-2.5 rounded-full" style="width: 80%"></div></div>
                     </div>
-                    <!-- Skill Item -->
                     <div>
                         <div class="flex justify-between items-center mb-1"><span class="font-semibold text-lg flex items-center gap-3"><i class="devicon-opencv-plain text-xl text-brand-red"></i>OpenCV</span><span>80%</span></div>
                         <div class="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2.5"><div class="bg-brand-red h-2.5 rounded-full" style="width: 80%"></div></div>
                     </div>
-                     <!-- Skill Item -->
                     <div>
                         <div class="flex justify-between items-center mb-1"><span class="font-semibold text-lg flex items-center gap-3"><i class="devicon-firebase-plain text-xl text-brand-red"></i>Firebase</span><span>70%</span></div>
                         <div class="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2.5"><div class="bg-brand-red h-2.5 rounded-full" style="width: 70%"></div></div>
@@ -371,32 +396,26 @@
              <div data-aos="fade-left">
                 <h3 class="section-heading text-4xl text-gray-900 dark:text-white mb-8">DESIGNER TOOLS</h3>
                  <div class="bg-white dark:bg-[#1C1C1C] p-8 rounded-lg card-3d space-y-6">
-                    <!-- Skill Item -->
                     <div>
                         <div class="flex justify-between items-center mb-1"><span class="font-semibold text-lg flex items-center gap-3"><i class="devicon-premierepro-plain text-xl text-brand-red"></i>Premiere Pro</span><span>95%</span></div>
                         <div class="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2.5"><div class="bg-brand-red h-2.5 rounded-full" style="width: 95%"></div></div>
                     </div>
-                    <!-- Skill Item -->
                     <div>
                         <div class="flex justify-between items-center mb-1"><span class="font-semibold text-lg flex items-center gap-3"><i class="devicon-aftereffects-plain text-xl text-brand-red"></i>After Effects</span><span>90%</span></div>
                         <div class="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2.5"><div class="bg-brand-red h-2.5 rounded-full" style="width: 90%"></div></div>
                     </div>
-                    <!-- Skill Item -->
                      <div>
                         <div class="flex justify-between items-center mb-1"><span class="font-semibold text-lg flex items-center gap-3"><i class="devicon-photoshop-plain text-xl text-brand-red"></i>Photoshop</span><span>95%</span></div>
                         <div class="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2.5"><div class="bg-brand-red h-2.5 rounded-full" style="width: 95%"></div></div>
                     </div>
-                    <!-- Skill Item -->
                     <div>
                         <div class="flex justify-between items-center mb-1"><span class="font-semibold text-lg flex items-center gap-3"><i class="devicon-illustrator-plain text-xl text-brand-red"></i>Illustrator</span><span>70%</span></div>
                         <div class="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2.5"><div class="bg-brand-red h-2.5 rounded-full" style="width: 70%"></div></div>
                     </div>
-                    <!-- Skill Item -->
                     <div>
                         <div class="flex justify-between items-center mb-1"><span class="font-semibold text-lg flex items-center gap-3"><i class="fas fa-palette text-xl text-brand-red"></i>Color Grading</span><span>85%</span></div>
                         <div class="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2.5"><div class="bg-brand-red h-2.5 rounded-full" style="width: 85%"></div></div>
                     </div>
-                     <!-- Skill Item -->
                     <div>
                         <div class="flex justify-between items-center mb-1"><span class="font-semibold text-lg flex items-center gap-3"><i class="fas fa-bullhorn text-xl text-brand-red"></i>Content Strategy</span><span>80%</span></div>
                         <div class="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2.5"><div class="bg-brand-red h-2.5 rounded-full" style="width: 80%"></div></div>
@@ -405,19 +424,18 @@
             </div>
         </div>
 
-        <!-- PROJECTS -->
         <div class="space-y-20">
             <!-- Project 1: Cortex-V -->
             <div class="bg-white dark:bg-[#1C1C1C] p-8 rounded-lg card-3d" data-aos="fade-up">
                 <h3 class="section-heading text-4xl text-gray-900 dark:text-white mb-4">Case Study: Cortex-V</h3>
                 <div class="grid lg:grid-cols-2 gap-8">
                     <div>
-                        <h4 class="font-bold text-lg mb-2 text-brand-red">The Problem</h4>
-                        <p class="text-gray-600 dark:text-gray-400 mb-6">Create a high-speed, scalable image retrieval system that can find similar images from a large database based on content, not just tags.</p>
-                        <h4 class="font-bold text-lg mb-2 text-brand-red">My Role & Process</h4>
-                        <p class="text-gray-600 dark:text-gray-400 mb-6">I architected the end-to-end pipeline, using OpenAI's CLIP model to convert over 2,000 images into vector embeddings. I then implemented a highly optimized FAISS index for similarity search and developed a responsive Flask web app for real-time queries.</p>
-                        <h4 class="font-bold text-lg mb-2 text-brand-red">The Outcome</h4>
-                        <p class="text-gray-600 dark:text-gray-400">Achieved an average query latency of just 90ms with a 99% successful retrieval rate. The architecture is scalable to over 100,000 images with minimal performance degradation.</p>
+                        <h4 class="font-bold text-lg mb-2 text-brand-red">The Challenge</h4>
+                        <p class="text-gray-600 dark:text-gray-400 mb-6">To engineer a high-speed, scalable image retrieval system capable of finding visually similar images within a vast database based on their content, not just metadata.</p>
+                        <h4 class="font-bold text-lg mb-2 text-brand-red">My Solution</h4>
+                        <p class="text-gray-600 dark:text-gray-400 mb-6">I architected the end-to-end pipeline, leveraging OpenAI's CLIP model to transform over 2,000 images into vector embeddings. For the core search functionality, I implemented a highly optimized FAISS index and developed a responsive Flask web app for real-time queries.</p>
+                        <h4 class="font-bold text-lg mb-2 text-brand-red">The Impact</h4>
+                        <p class="text-gray-600 dark:text-gray-400">The system achieved an average query latency of just 90ms with a 99% successful retrieval rate. The architecture is built to scale, handling over 100,000 images with minimal performance degradation.</p>
                         <div class="mt-8 flex items-center gap-x-6">
                             <a href="https://github.com/aryensiwach/VectorSearchEngine" target="_blank" class="inline-block px-6 py-2 border-2 border-brand-red text-brand-red font-bold tracking-wider hover:bg-brand-red hover:text-white dark:hover:text-black transition-all duration-300">VIEW ON GITHUB</a>
                             <div class="flex items-center gap-4 text-gray-600 dark:text-gray-400">
@@ -440,12 +458,12 @@
                 <h3 class="section-heading text-4xl text-gray-900 dark:text-white mb-4">Case Study: AI Code Evaluation</h3>
                 <div class="grid lg:grid-cols-2 gap-8">
                     <div>
-                        <h4 class="font-bold text-lg mb-2 text-brand-red">The Problem</h4>
-                        <p class="text-gray-600 dark:text-gray-400 mb-6">Develop a platform for real-time code compilation and AI-assisted evaluation to improve accuracy and reduce manual effort.</p>
-                        <h4 class="font-bold text-lg mb-2 text-brand-red">My Role & Process</h4>
-                        <p class="text-gray-600 dark:text-gray-400 mb-6">I engineered the core C++ module that integrated Judge0 and Gemini APIs. I focused on optimizing API calls and architected a scalable backend tested with over 200 concurrent users.</p>
-                        <h4 class="font-bold text-lg mb-2 text-brand-red">The Outcome</h4>
-                        <p class="text-gray-600 dark:text-gray-400">Successfully cut evaluation latency by 30%, increased developer productivity by 20%, and improved evaluation accuracy by 25% over traditional rule-based systems.</p>
+                        <h4 class="font-bold text-lg mb-2 text-brand-red">The Challenge</h4>
+                        <p class="text-gray-600 dark:text-gray-400 mb-6">To build a platform for real-time code compilation and AI-assisted evaluation, aiming to enhance accuracy and significantly reduce the manual effort involved in grading code submissions.</p>
+                        <h4 class="font-bold text-lg mb-2 text-brand-red">My Solution</h4>
+                        <p class="text-gray-600 dark:text-gray-400 mb-6">I engineered the core C++ module that seamlessly integrated Judge0 for compilation and the Gemini API for intelligent feedback. My focus was on optimizing API calls and architecting a scalable backend that was stress-tested with over 200 concurrent users.</p>
+                        <h4 class="font-bold text-lg mb-2 text-brand-red">The Impact</h4>
+                        <p class="text-gray-600 dark:text-gray-400">The platform successfully cut evaluation latency by 30% and improved developer productivity by 20%. Most notably, it achieved a 25% increase in evaluation accuracy compared to traditional rule-based systems.</p>
                         <div class="mt-8 flex items-center gap-x-6">
                             <a href="https://internhub-c469b.web.app" target="_blank" class="inline-block px-6 py-2 border-2 border-brand-red text-brand-red font-bold tracking-wider hover:bg-brand-red hover:text-white dark:hover:text-black transition-all duration-300">VIEW LIVE PROJECT</a>
                             <div class="flex items-center gap-4 text-gray-600 dark:text-gray-400">
@@ -468,12 +486,12 @@
                 <h3 class="section-heading text-4xl text-gray-900 dark:text-white mb-4">Case Study: Face Recognition Attendance</h3>
                 <div class="grid lg:grid-cols-2 gap-8">
                     <div>
-                        <h4 class="font-bold text-lg mb-2 text-brand-red">The Problem</h4>
-                        <p class="text-gray-600 dark:text-gray-400 mb-6">Automate the manual attendance process to reduce errors and save time, especially for large classes or organizations.</p>
-                        <h4 class="font-bold text-lg mb-2 text-brand-red">My Role & Process</h4>
-                        <p class="text-gray-600 dark:text-gray-400 mb-6">I developed a Python-based system using OpenCV for real-time face detection and recognition. I trained a model on a custom dataset, integrated it with a CSV backend for attendance logging, and built a simple UI with Tkinter for system management.</p>
-                        <h4 class="font-bold text-lg mb-2 text-brand-red">The Outcome</h4>
-                        <p class="text-gray-600 dark:text-gray-400">The system achieved a 98% accuracy rate in controlled environments. It reduced the time for attendance marking by over 95% and eliminated proxy attendance issues.</p>
+                        <h4 class="font-bold text-lg mb-2 text-brand-red">The Challenge</h4>
+                        <p class="text-gray-600 dark:text-gray-400 mb-6">To automate the time-consuming and error-prone process of manual attendance, particularly for large groups, and to eliminate the possibility of proxy attendance.</p>
+                        <h4 class="font-bold text-lg mb-2 text-brand-red">My Solution</h4>
+                        <p class="text-gray-600 dark:text-gray-400 mb-6">I developed a Python-based system using OpenCV for real-time face detection and recognition. The process involved training a model on a custom dataset, integrating it with a CSV backend for attendance logging, and building a simple Tkinter UI for system management.</p>
+                        <h4 class="font-bold text-lg mb-2 text-brand-red">The Impact</h4>
+                        <p class="text-gray-600 dark:text-gray-400">The system achieved a 98% accuracy rate in controlled environments, reduced attendance marking time by over 95%, and effectively eliminated proxy attendance issues, ensuring an accurate and efficient record.</p>
                         <div class="mt-8 flex items-center gap-x-6">
                             <a href="https://github.com/aryensiwach/Face-Recognition-Attendance-System" target="_blank" class="inline-block px-6 py-2 border-2 border-brand-red text-brand-red font-bold tracking-wider hover:bg-brand-red hover:text-white dark:hover:text-black transition-all duration-300">VIEW ON GITHUB</a>
                             <div class="flex items-center gap-4 text-gray-600 dark:text-gray-400">
@@ -494,7 +512,7 @@
 
     <!-- ACHIEVEMENTS SECTION -->
     <section id="achievements" class="py-24" data-aos="fade-up">
-        <div class="text-center mb-16"><h2 class="section-heading text-5xl text-gray-900 dark:text-white">MILESTONES & ACHIEVEMENTS</h2></div>
+        <div class="text-center mb-16"><h2 class="section-heading text-5xl text-gray-900 dark:text-white">Milestones & Achievements</h2></div>
         <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
             <div class="bg-white dark:bg-[#1C1C1C] p-6 rounded-lg card-3d text-center"><i class="fas fa-trophy text-4xl text-brand-red mb-3"></i><h4 class="font-bold text-lg">70 Million+ Views</h4><p class="text-gray-600 dark:text-gray-400">Across multiple digital platforms.</p></div>
             <div class="bg-white dark:bg-[#1C1C1C] p-6 rounded-lg card-3d text-center"><i class="fas fa-keyboard text-4xl text-brand-red mb-3"></i><h4 class="font-bold text-lg">400+ Problems Solved</h4><p class="text-gray-600 dark:text-gray-400">On LeetCode, HackerRank etc.</p></div>
@@ -508,45 +526,29 @@
     <!-- CLIENTS SECTION -->
     <section id="clients" class="py-24" data-aos="fade-up">
         <div class="text-center mb-16">
-            <h2 class="section-heading text-5xl text-gray-900 dark:text-white">TRUSTED BY</h2>
+            <h2 class="section-heading text-5xl text-gray-900 dark:text-white">Trusted By</h2>
             <p class="text-lg text-gray-600 dark:text-gray-400 mt-2">I've had the privilege of working with some amazing brands.</p>
         </div>
         <div class="max-w-4xl mx-auto grid grid-cols-2 md:grid-cols-4 gap-8 items-center">
-            <div class="flex justify-center" data-aos="fade-up">
-                <img src="BM.png" alt="Big Muscles Nutrition Logo" class="h-20 filter grayscale hover:grayscale-0 transition duration-300 dark:invert dark:hover:invert-0">
-            </div>
-            <div class="flex justify-center" data-aos="fade-up" data-aos-delay="100">
-                <img src="ICON.jpg" alt="Icon.com Logo" class="h-20 filter grayscale hover:grayscale-0 transition duration-300 dark:invert dark:hover:invert-0">
-            </div>
-            <div class="flex justify-center" data-aos="fade-up" data-aos-delay="200">
-                <img src="BELLAVITA.jpg" alt="Bella Vita Logo" class="h-20 filter grayscale hover:grayscale-0 transition duration-300 dark:invert dark:hover:invert-0">
-            </div>
-            <div class="flex justify-center" data-aos="fade-up" data-aos-delay="300">
-                <img src="freelancer.jpg" alt="Freelancer Logo" class="h-20 filter grayscale hover:grayscale-0 transition duration-300 dark:invert dark:hover:invert-0">
-            </div>
+            <div class="flex justify-center" data-aos="fade-up"><img src="BM.png" alt="Big Muscles Nutrition Logo" class="h-20 filter grayscale hover:grayscale-0 transition duration-300 dark:invert dark:hover:invert-0"></div>
+            <div class="flex justify-center" data-aos="fade-up" data-aos-delay="100"><img src="ICON.jpg" alt="Icon.com Logo" class="h-20 filter grayscale hover:grayscale-0 transition duration-300 dark:invert dark:hover:invert-0"></div>
+            <div class="flex justify-center" data-aos="fade-up" data-aos-delay="200"><img src="BELLAVITA.jpg" alt="Bella Vita Logo" class="h-20 filter grayscale hover:grayscale-0 transition duration-300 dark:invert dark:hover:invert-0"></div>
+            <div class="flex justify-center" data-aos="fade-up" data-aos-delay="300"><img src="freelancer.jpg" alt="Freelancer Logo" class="h-20 filter grayscale hover:grayscale-0 transition duration-300 dark:invert dark:hover:invert-0"></div>
         </div>
     </section>
     
     <!-- CERTIFICATIONS SECTION -->
     <section id="certifications" class="py-24" data-aos="fade-up">
-        <div class="text-center mb-16"><h2 class="section-heading text-5xl text-gray-900 dark:text-white">CERTIFICATIONS</h2></div>
+        <div class="text-center mb-16"><h2 class="section-heading text-5xl text-gray-900 dark:text-white">Certifications</h2></div>
         <div class="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
-            <a href="#" class="block bg-white dark:bg-[#1C1C1C] p-6 rounded-lg card-3d">
-                <img src="CPP certificate.jpg" alt="C++ Certificate" class="w-full h-auto object-cover rounded-md mb-4">
-                <h3 class="text-xl font-bold">C++ Programming</h3>
-                <p class="text-md text-gray-500 dark:text-gray-400">Infosys Springboard</p>
-            </a>
-            <a href="#" class="block bg-white dark:bg-[#1C1C1C] p-6 rounded-lg card-3d">
-                <img src="problem solving basics.png" alt="HackerRank Certificate" class="w-full h-auto object-cover rounded-md mb-4">
-                <h3 class="text-xl font-bold">Problem Solving (Basic & Intermediate)</h3>
-                <p class="text-md text-gray-500 dark:text-gray-400">HackerRank</p>
-            </a>
+            <a href="#" class="block bg-white dark:bg-[#1C1C1C] p-6 rounded-lg card-3d"><img src="CPP certificate.jpg" alt="C++ Certificate" class="w-full h-auto object-cover rounded-md mb-4"><h3 class="text-xl font-bold">C++ Programming</h3><p class="text-md text-gray-500 dark:text-gray-400">Infosys Springboard</p></a>
+            <a href="#" class="block bg-white dark:bg-[#1C1C1C] p-6 rounded-lg card-3d"><img src="problem solving basics.png" alt="HackerRank Certificate" class="w-full h-auto object-cover rounded-md mb-4"><h3 class="text-xl font-bold">Problem Solving (Basic & Intermediate)</h3><p class="text-md text-gray-500 dark:text-gray-400">HackerRank</p></a>
         </div>
     </section>
 
-    <!-- ONLINE PRESENCE, TESTIMONIALS & CONTACT remain full-width -->
+    <!-- ONLINE PRESENCE SECTION -->
     <section id="profiles" class="py-24" data-aos="fade-up">
-        <div class="text-center mb-16"><h2 class="section-heading text-5xl text-gray-900 dark:text-white">ONLINE PRESENCE</h2><p class="text-lg text-gray-600 dark:text-gray-400 mt-2">Find Me On These Platforms</p></div>
+        <div class="text-center mb-16"><h2 class="section-heading text-5xl text-gray-900 dark:text-white">Online Presence</h2><p class="text-lg text-gray-600 dark:text-gray-400 mt-2">Find Me On These Platforms</p></div>
         <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-8 max-w-6xl mx-auto">
             <a href="https://github.com/aryensiwach" target="_blank" class="bg-white dark:bg-[#1C1C1C] p-6 rounded-lg flex flex-col items-center justify-center text-center transition-all duration-300 transform hover:bg-brand-red hover:text-white dark:hover:text-white hover:-translate-y-2 hover:shadow-2xl dark:hover:shadow-red-500/50"><i class="fab fa-github text-4xl mb-3"></i><span class="font-semibold">GitHub</span></a>
             <a href="https://www.linkedin.com/in/aryendra-chaudhary-97922224b/" target="_blank" class="bg-white dark:bg-[#1C1C1C] p-6 rounded-lg flex flex-col items-center justify-center text-center transition-all duration-300 transform hover:bg-brand-red hover:text-white dark:hover:text-white hover:-translate-y-2 hover:shadow-2xl dark:hover:shadow-red-500/50"><i class="fab fa-linkedin text-4xl mb-3"></i><span class="font-semibold">LinkedIn</span></a>
@@ -558,7 +560,7 @@
     </section>
 
     <section id="testimonials" class="py-24" data-aos="fade-up">
-        <div class="text-center mb-16"><h2 class="section-heading text-5xl text-gray-900 dark:text-white">WHAT THEY SAY</h2></div>
+        <div class="text-center mb-16"><h2 class="section-heading text-5xl text-gray-900 dark:text-white">What They Say</h2></div>
         <div class="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto">
             <div class="bg-white dark:bg-[#1C1C1C] p-8 rounded-lg card-3d" data-aos="fade-right"><i class="fas fa-quote-left text-3xl text-brand-red mb-4"></i><p class="italic text-gray-600 dark:text-gray-400">"Aryendra’s editing turned our dull footage into a blockbuster promo in just 24 hours. His creativity and speed are unmatched. Highly recommended!"</p><p class="mt-4 font-bold text-right">— Fitness Brand Client</p></div>
             <div class="bg-white dark:bg-[#1C1C1C] p-8 rounded-lg card-3d" data-aos="fade-left"><i class="fas fa-quote-left text-3xl text-brand-red mb-4"></i><p class="italic text-gray-600 dark:text-gray-400">"Accurate, fast, and super easy to use. The face recognition system has saved us hours of manual work and Aryendra delivered it flawlessly."</p><p class="mt-4 font-bold text-right">— Project Lead</p></div>
@@ -567,20 +569,13 @@
 
     <section id="contact" class="py-24" data-aos="fade-up">
         <div class="text-center">
-            <h2 class="section-heading text-5xl text-gray-900 dark:text-white">GET IN TOUCH</h2>
-            <p class="text-lg text-gray-600 dark:text-gray-400 mt-2 max-w-2xl mx-auto">Have a project in mind or just want to say hi? Let's connect.</p>
+            <h2 class="section-heading text-5xl text-gray-900 dark:text-white">Get In Touch</h2>
+            <p class="text-lg text-gray-600 dark:text-gray-400 mt-2 max-w-2xl mx-auto">Have a project in mind, or just want to say hello? My inbox is always open.</p>
             
             <form action="https://formspree.io/f/xbjnddgz" method="POST" class="max-w-xl mx-auto mt-12 text-left space-y-6">
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    <input type="text" name="name" placeholder="Your Name" required class="w-full bg-white dark:bg-[#1C1C1C] border-2 border-gray-300 dark:border-gray-700 rounded-lg p-3 focus:outline-none focus:border-brand-red transition-colors">
-                    <input type="email" name="email" placeholder="Your Email" required class="w-full bg-white dark:bg-[#1C1C1C] border-2 border-gray-300 dark:border-gray-700 rounded-lg p-3 focus:outline-none focus:border-brand-red transition-colors">
-                </div>
-                <div>
-                    <textarea name="message" placeholder="Your Message" rows="5" required class="w-full bg-white dark:bg-[#1C1C1C] border-2 border-gray-300 dark:border-gray-700 rounded-lg p-3 focus:outline-none focus:border-brand-red transition-colors"></textarea>
-                </div>
-                <div class="text-center">
-                    <button type="submit" class="inline-block px-10 py-3 bg-brand-red text-white font-bold text-lg tracking-wider hover:bg-opacity-90 transition-all duration-300 rounded-lg">SEND MESSAGE</button>
-                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6"><input type="text" name="name" placeholder="Your Name" required class="w-full bg-white dark:bg-[#1C1C1C] border-2 border-gray-300 dark:border-gray-700 rounded-lg p-3 focus:outline-none focus:border-brand-red transition-colors"><input type="email" name="email" placeholder="Your Email" required class="w-full bg-white dark:bg-[#1C1C1C] border-2 border-gray-300 dark:border-gray-700 rounded-lg p-3 focus:outline-none focus:border-brand-red transition-colors"></div>
+                <div><textarea name="message" placeholder="Your Message" rows="5" required class="w-full bg-white dark:bg-[#1C1C1C] border-2 border-gray-300 dark:border-gray-700 rounded-lg p-3 focus:outline-none focus:border-brand-red transition-colors"></textarea></div>
+                <div class="text-center"><button type="submit" class="inline-block px-10 py-3 bg-brand-red text-white font-bold text-lg tracking-wider hover:bg-opacity-90 transition-all duration-300 rounded-lg">SEND MESSAGE</button></div>
             </form>
     
             <div class="mt-16 flex justify-center gap-8 text-3xl text-gray-500 dark:text-gray-400">
@@ -595,20 +590,48 @@
   <!-- Resume Modal -->
     <div id="resume-modal" class="fixed inset-0 bg-black/80 backdrop-blur-sm z-[100] hidden flex items-center justify-center p-4">
         <div class="bg-white dark:bg-[#1C1C1C] rounded-lg w-full max-w-4xl h-[90vh] flex flex-col">
-            <div class="flex justify-between items-center p-4 border-b border-gray-300 dark:border-gray-800">
-                <h3 class="font-heading text-2xl">Resume Preview</h3>
-                <button id="close-modal-btn" class="text-2xl hover:text-brand-red transition-colors">&times;</button>
-            </div>
-            <div class="flex-grow p-4">
-                <iframe id="resume-iframe" src="" class="w-full h-full rounded"></iframe>
-            </div>
+            <div class="flex justify-between items-center p-4 border-b border-gray-300 dark:border-gray-800"><h3 class="font-heading text-2xl">Resume Preview</h3><button id="close-modal-btn" class="text-2xl hover:text-brand-red transition-colors">&times;</button></div>
+            <div class="flex-grow p-4"><iframe id="resume-iframe" src="" class="w-full h-full rounded"></iframe></div>
         </div>
     </div>
+    
+  <!-- Gemini AI Assistant -->
+  <div id="ai-assistant-container">
+    <button id="ai-assistant-button" class="fixed bottom-8 right-8 bg-brand-red text-white w-16 h-16 rounded-full shadow-lg flex items-center justify-center transform hover:scale-110 transition-transform duration-300 z-50">
+      <i class="fas fa-robot text-2xl"></i>
+    </button>
+    <div id="ai-chat-modal" class="fixed inset-0 bg-black/50 backdrop-blur-sm z-[100] hidden flex items-center justify-center p-4">
+      <div class="bg-slate-900 dark text-white rounded-xl shadow-2xl w-full max-w-lg h-[80vh] flex flex-col border border-brand-red/30" style="background-image: radial-gradient(circle at 50% 100%, rgba(255,0,0,0.15), transparent 50%);">
+        <div class="flex justify-between items-center p-4 border-b border-brand-red/30 shadow-[0_1px_10px_rgba(255,0,0,0.2)]">
+          <h3 class="font-heading text-2xl flex items-center gap-3 text-shadow-custom">✨ AI Assistant <span id="ai-typing-indicator" class="hidden text-sm font-sans animate-pulse-subtle">typing...</span></h3>
+          <button id="ai-close-modal-btn" class="text-2xl hover:text-brand-red transition-colors">&times;</button>
+        </div>
+        <div id="ai-chat-history" class="flex-grow p-4 space-y-4 overflow-y-auto">
+          <!-- Chat messages will be appended here -->
+           <div class="flex justify-start">
+             <div class="bg-slate-800 rounded-lg p-3 max-w-xs">
+               <p class="text-sm">Hello! I'm Astra, Aryendra's AI assistant. Feel free to ask me anything about his skills, projects, or experience.</p>
+             </div>
+           </div>
+        </div>
+        <form id="ai-chat-form" class="p-4 border-t border-brand-red/20 flex items-center gap-3">
+          <input type="text" id="ai-chat-input" placeholder="Ask about a project..." class="w-full bg-slate-800 border-2 border-slate-700 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-brand-red focus:border-transparent transition-all" required>
+          <button type="submit" class="bg-brand-red text-white px-5 py-3 rounded-lg hover:bg-opacity-90 transition-colors flex-shrink-0">
+            <i class="fas fa-paper-plane"></i>
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
 
+  <!-- Back to Top Button -->
+  <button id="back-to-top-btn" title="Go to top">
+    <i class="fas fa-arrow-up"></i>
+  </button>
 
   <footer class="text-center py-8 border-t border-gray-300 dark:border-gray-800 mt-16">
     <div class="flex justify-center items-center gap-2">
-        <p class="text-gray-500 dark:text-gray-500">&copy; 2025 Aryendra Chaudhary. Design inspired by modern gaming UI.</p>
+        <p class="text-gray-500 dark:text-gray-500">&copy; 2025 Aryendra Chaudhary. Crafted with code and creativity.</p>
         <div id="hidden-gem" class="w-3 h-3 bg-brand-red rounded-full cursor-pointer pulse-gem"></div>
     </div>
   </footer>
@@ -680,10 +703,8 @@
             const rect = card.getBoundingClientRect();
             const x = e.clientX - rect.left - rect.width / 2;
             const y = e.clientY - rect.top - rect.height / 2;
-
-            const rotateY = -x / 50; // Adjust divisor for sensitivity
-            const rotateX = y / 50;
-
+            const rotateY = -x / 35; 
+            const rotateX = y / 35;
             card.style.transform = `perspective(1000px) rotateY(${rotateY}deg) rotateX(${rotateX}deg) scale(1.02)`;
         });
 
@@ -695,20 +716,14 @@
     // Hero Title Magnetic Effect
     const heroTitle = document.getElementById('hero-title');
     heroTitle.innerHTML = heroTitle.textContent.replace(/\S/g, "<span>$&</span>");
-
     const spans = heroTitle.querySelectorAll('span');
     heroTitle.addEventListener('mousemove', function(e) {
       const { clientX, clientY } = e;
-      
       spans.forEach(span => {
         const { left, top, width, height } = span.getBoundingClientRect();
         const spanCenterX = left + width / 1.2;
         const spanCenterY = top + height / 1.2;
-
-        const distance = Math.sqrt(
-          Math.pow(clientX - spanCenterX, 2) + Math.pow(clientY - spanCenterY, 2)
-        );
-
+        const distance = Math.sqrt(Math.pow(clientX - spanCenterX, 2) + Math.pow(clientY - spanCenterY, 2));
         const maxDistance = 150;
         if (distance < maxDistance) {
           const factor = 1 - distance / maxDistance;
@@ -722,7 +737,6 @@
         }
       });
     });
-
      heroTitle.addEventListener('mouseleave', function() {
         spans.forEach(span => {
             span.style.transition = 'transform 0.5s ease-in-out';
@@ -754,12 +768,10 @@
             resumeModal.classList.remove('hidden');
         });
     });
-
     closeModalBtn.addEventListener('click', () => {
         resumeModal.classList.add('hidden');
-        resumeIframe.src = ''; // Clear src to stop loading
+        resumeIframe.src = ''; 
     });
-    
     resumeModal.addEventListener('click', (e) => {
         if(e.target === resumeModal) {
             resumeModal.classList.add('hidden');
@@ -767,75 +779,66 @@
         }
     });
 
+    // Back to Top Button Logic
+    const backToTopBtn = document.getElementById('back-to-top-btn');
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 400) {
+        backToTopBtn.classList.add('show');
+      } else {
+        backToTopBtn.classList.remove('show');
+      }
+    });
+    backToTopBtn.addEventListener('click', () => {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+
+
     // Three.js Interactive Background
     const initThreeJs = () => {
         const container = document.getElementById('three-bg');
         if (!container) return;
-
         let scene, camera, renderer, particles;
         const particleCount = 5000;
 
-        // Scene
         scene = new THREE.Scene();
-
-        // Camera
         camera = new THREE.PerspectiveCamera(75, container.offsetWidth / container.offsetHeight, 0.1, 1000);
         camera.position.z = 0.5;
 
-        // Renderer
         renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
-        renderer.setClearColor(0x000000, 0); // Transparent background
+        renderer.setClearColor(0x000000, 0);
         renderer.setSize(container.offsetWidth, container.offsetHeight);
         renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
         container.appendChild(renderer.domElement);
 
-        // Particles
         const geometry = new THREE.BufferGeometry();
         const positions = new Float32Array(particleCount * 3);
-
         for (let i = 0; i < particleCount * 3; i++) {
             positions[i] = (Math.random() - 0.5) * 15;
         }
         geometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
 
-        const material = new THREE.PointsMaterial({
-            size: 0.015,
-            color: 0xff0000,
-            transparent: true,
-            opacity: 0.7
-        });
-
+        const material = new THREE.PointsMaterial({ size: 0.015, color: 0xff0000, transparent: true, opacity: 0.7 });
         particles = new THREE.Points(geometry, material);
         scene.add(particles);
 
-        // Mouse move listener
-        let mouseX = 0;
-        let mouseY = 0;
+        let mouseX = 0, mouseY = 0;
         document.addEventListener('mousemove', (event) => {
             mouseX = (event.clientX / window.innerWidth) * 2 - 1;
             mouseY = -(event.clientY / window.innerHeight) * 2 + 1;
         });
 
-        // Animation Loop
         const clock = new THREE.Clock();
         const animate = () => {
             requestAnimationFrame(animate);
             const elapsedTime = clock.getElapsedTime();
-
-            // Animate particles
             particles.rotation.y = elapsedTime * 0.1;
-            
-            // Animate camera based on mouse
             camera.position.x += (mouseX * 0.2 - camera.position.x) * 0.02;
             camera.position.y += (mouseY * 0.2 - camera.position.y) * 0.02;
             camera.lookAt(scene.position);
-
-
             renderer.render(scene, camera);
         };
         animate();
 
-        // Handle Resize
         window.addEventListener('resize', () => {
             camera.aspect = container.offsetWidth / container.offsetHeight;
             camera.updateProjectionMatrix();
@@ -844,6 +847,101 @@
         });
     };
     initThreeJs();
+
+    // --- Gemini AI Assistant Logic ---
+    const aiAssistantButton = document.getElementById('ai-assistant-button');
+    const aiChatModal = document.getElementById('ai-chat-modal');
+    const aiCloseModalBtn = document.getElementById('ai-close-modal-btn');
+    const aiChatForm = document.getElementById('ai-chat-form');
+    const aiChatInput = document.getElementById('ai-chat-input');
+    const aiChatHistory = document.getElementById('ai-chat-history');
+    const aiTypingIndicator = document.getElementById('ai-typing-indicator');
+
+    aiAssistantButton.addEventListener('click', () => aiChatModal.classList.remove('hidden'));
+    aiCloseModalBtn.addEventListener('click', () => aiChatModal.classList.add('hidden'));
+    aiChatModal.addEventListener('click', (e) => {
+        if (e.target === aiChatModal) {
+            aiChatModal.classList.add('hidden');
+        }
+    });
+
+    const portfolioContext = `
+      About Aryendra: He is a passionate creator at the intersection of technology and art with over three years of experience in software development and video content production. He approaches problems with an engineer's logic and an artist's eye for detail. He has driven audience engagement past 70 million views and solved over 400 coding challenges. His goal is to create impactful experiences that resonate and deliver results.
+
+      Journey & Education:
+      - Video Editor (Freelance) at Icon.com (May 2025 – Sept 2025): Delivered 30+ short-form videos, collaborated with marketing, and used After Effects for motion graphics.
+      - Brand Manager & Content Creator (2022 – Present): Grew a personal fitness brand to 20K+ followers and 70M+ views. Managed post-production for 200+ videos.
+      - B.Tech in Information Technology from Meerut Institute of Engineering and Technology (2022 – 2026).
+      - 12th Grade (CBSE) from Dewan Public School (2022).
+      - 10th Grade (CBSE) from Dewan Public School (2020).
+
+      Projects:
+      1. Cortex-V (Vector Search Engine): A high-speed image retrieval system using OpenAI's CLIP model and FAISS index. It achieved a 90ms query latency. Tech stack: Python, Flask, FAISS, CLIP.
+      2. AI Code Evaluation: A platform for real-time code compilation and AI-assisted feedback using Judge0 and Gemini API. It cut latency by 30% and improved accuracy by 25%. Tech stack: C++, Gemini API, Judge0 API.
+      3. Face Recognition Attendance System: An automated attendance system using OpenCV. It achieved 98% accuracy and reduced marking time by 95%. Tech stack: Python, OpenCV.
+
+      Skills:
+      - Developer: C++ (95%), Python (85%), DSA & OOP (95%), MySQL (80%), OpenCV (80%), Firebase (70%).
+      - Designer: Premiere Pro (95%), After Effects (90%), Photoshop (95%), Illustrator (70%), Color Grading (85%), Content Strategy (80%).
+    `;
+
+    const systemPrompt = `You are Astra, Aryendra Chaudhary's helpful AI assistant on his portfolio website. Your goal is to answer questions from visitors based ONLY on the provided context. Do not use external knowledge. If the answer isn't in the context, politely say "I don't have that information, but you can contact Aryendra directly through the contact form." Keep your answers friendly and concise. Context: ${portfolioContext}`;
+    
+    aiChatForm.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const userQuery = aiChatInput.value.trim();
+        if (!userQuery) return;
+
+        appendMessage(userQuery, 'user');
+        aiChatInput.value = '';
+        aiTypingIndicator.classList.remove('hidden');
+
+        try {
+            const apiKey = ""; // Will be provided by the environment
+            const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-05-20:generateContent?key=${apiKey}`;
+
+            const payload = {
+                contents: [{ parts: [{ text: userQuery }] }],
+                systemInstruction: { parts: [{ text: systemPrompt }] },
+            };
+
+            const response = await fetch(apiUrl, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(payload)
+            });
+
+            if (!response.ok) {
+                throw new Error(`API error: ${response.statusText}`);
+            }
+
+            const result = await response.json();
+            const aiResponse = result.candidates?.[0]?.content?.parts?.[0]?.text || "Sorry, I couldn't process that. Please try asking differently.";
+            appendMessage(aiResponse, 'ai');
+
+        } catch (error) {
+            console.error('Gemini API Error:', error);
+            appendMessage("I'm having a little trouble connecting right now. Please try again in a moment.", 'ai');
+        } finally {
+            aiTypingIndicator.classList.add('hidden');
+        }
+    });
+
+    function appendMessage(text, sender) {
+        const messageWrapper = document.createElement('div');
+        const messageBubble = document.createElement('div');
+        const messageText = document.createElement('p');
+        
+        messageWrapper.className = `flex ${sender === 'user' ? 'justify-end' : 'justify-start'}`;
+        messageBubble.className = `rounded-lg p-3 max-w-xs ${sender === 'user' ? 'bg-brand-red text-white' : 'bg-slate-800'}`;
+        messageText.className = 'text-sm';
+        messageText.textContent = text;
+
+        messageBubble.appendChild(messageText);
+        messageWrapper.appendChild(messageBubble);
+        aiChatHistory.appendChild(messageWrapper);
+        aiChatHistory.scrollTop = aiChatHistory.scrollHeight;
+    }
 
   </script>
 </body>
